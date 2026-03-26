@@ -7,424 +7,341 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
 :root{
-  --bg:#050508;--surface:#0d0d14;--card:#12121c;
-  --gold:#f5c842;--gold2:#e8a020;--gold-dim:rgba(245,200,66,0.1);
-  --blue:#4f8ef7;--teal:#00d4aa;--purple:#9b59f7;--pink:#f759ab;--orange:#f57814;--green:#00d478;
-  --text:#f0f0f5;--muted:#6060a0;--border:rgba(255,255,255,0.07);
+  --bg:#0a0a0a;--bg2:#111;--bg3:#161616;--card:#1a1a1a;
+  --border:#2a2a2a;--border2:#333;
+  --text:#f0f0f0;--muted:#666;--dim:#444;
+  --gold:#f5c842;--gold2:#c8960a;
+  --blue:#4f8ef7;--teal:#00d4aa;--purple:#9b59f7;--green:#00d478;--orange:#f57814;--pink:#f759ab;--red:#e74c3c;
+  --accent:var(--gold);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
-::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--gold);}
 
-/* NAV */
-nav{position:fixed;top:0;width:100%;z-index:200;padding:16px 48px;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.nav-monogram{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.nav-monogram::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.15));border-radius:10px;}
-.nm-text{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:800;color:#000;letter-spacing:-1px;position:relative;z-index:1;}
-.nav-name{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;color:var(--text);}
-.nav-name span{color:var(--muted);font-weight:400;font-size:.78rem;display:block;line-height:1;}
-.nav-links{display:flex;gap:28px;list-style:none;}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:.82rem;letter-spacing:.3px;transition:color .2s;}
+/* ── NAV ── */
+nav{position:fixed;top:0;width:100%;z-index:200;padding:0 48px;height:60px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:2px;color:var(--text);text-decoration:none;}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;transition:color .2s;}
 .nav-links a:hover{color:var(--text);}
-.nav-hire{position:relative;padding:9px 22px;border-radius:100px;font-size:.82rem;font-weight:700;text-decoration:none;color:#000;background:linear-gradient(135deg,var(--gold),var(--gold2));overflow:hidden;transition:all .25s;}
-.nav-hire::before{content:'';position:absolute;inset:-2px;background:linear-gradient(135deg,var(--gold),var(--gold2),#fff,var(--gold));background-size:300%;animation:shimmer 3s linear infinite;border-radius:100px;z-index:-1;}
-@keyframes shimmer{0%{background-position:0% 50%}100%{background-position:300% 50%}}
-.nav-hire:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(245,200,66,0.4);}
-.hire-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#000;margin-right:6px;animation:blink 1.5s infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.nav-cta{background:var(--gold);color:#000;padding:8px 20px;border-radius:4px;font-size:.78rem;font-weight:700;text-decoration:none;letter-spacing:.5px;transition:all .2s;}
+.nav-cta:hover{background:#fff;}
 
-/* HERO */
-#hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:90px 48px 0;}
-.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(79,142,247,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at 50% 40%,black 20%,transparent 75%);}
-.radial-glow{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(79,142,247,0.07) 0%,transparent 70%);top:50%;left:40%;transform:translate(-50%,-50%);}
-.hero-content{position:relative;z-index:1;max-width:620px;}
-.hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.25);padding:6px 16px;border-radius:100px;font-size:.75rem;color:var(--teal);margin-bottom:28px;letter-spacing:.3px;}
-.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
-.hero-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(3.2rem,7vw,6.2rem);font-weight:800;line-height:.92;letter-spacing:-3px;color:#fff;margin-bottom:6px;}
-.hero-name .grad{background:linear-gradient(90deg,var(--gold) 0%,var(--gold2) 60%,#ff9f43 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero-role{font-size:1rem;color:var(--muted);margin:22px 0 36px;line-height:1.75;}
-.hero-role strong{color:var(--text);}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
-.btn-glass{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text);padding:12px 22px;border-radius:100px;font-size:.87rem;text-decoration:none;transition:all .25s;cursor:pointer;}
-.btn-glass:hover{background:rgba(255,255,255,0.08);transform:translateY(-2px);}
-.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;border:none;font-weight:700;}
-.btn-gold:hover{filter:brightness(1.1);transform:translateY(-2px);box-shadow:0 8px 25px rgba(245,200,66,0.35);}
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 48px 60px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:80px 80px;opacity:.3;}
+.hero-tag{font-size:.72rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.hero-tag::before{content:'';width:30px;height:1px;background:var(--gold);}
+.hero-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(3.5rem,9vw,8rem);font-weight:800;line-height:.9;letter-spacing:-4px;color:var(--text);margin-bottom:32px;}
+.hero-name .outline{-webkit-text-stroke:1px rgba(255,255,255,0.2);color:transparent;}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:560px;line-height:1.8;margin-bottom:40px;}
+.hero-sub strong{color:var(--text);}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{background:var(--gold);color:#000;padding:12px 28px;border-radius:4px;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .2s;}
+.btn-primary:hover{background:#fff;}
+.btn-ghost{background:transparent;color:var(--text);padding:12px 28px;border-radius:4px;font-size:.85rem;font-weight:500;text-decoration:none;border:1px solid var(--border2);transition:all .2s;}
+.btn-ghost:hover{border-color:var(--text);}
+.hero-stats{display:flex;gap:0;margin-top:72px;border-top:1px solid var(--border);}
+.h-stat{padding:24px 40px 0 0;border-right:1px solid var(--border);margin-right:40px;}
+.h-stat:last-child{border-right:none;}
+.h-stat-num{font-family:'Space Grotesk',sans-serif;font-size:2.2rem;font-weight:800;color:var(--text);line-height:1;}
+.h-stat-num span{color:var(--gold);}
+.h-stat-label{font-size:.72rem;color:var(--muted);margin-top:6px;letter-spacing:.5px;text-transform:uppercase;}
+.scroll-label{position:absolute;bottom:32px;right:48px;font-size:.7rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;writing-mode:vertical-rl;display:flex;align-items:center;gap:8px;}
+.scroll-label::after{content:'';width:1px;height:40px;background:var(--border2);}
 
-/* ── HERO RIGHT — STATS PANEL ── */
-.hero-right{position:absolute;right:48px;top:50%;transform:translateY(-50%);z-index:1;width:310px;}
-.hero-stats-panel{display:flex;flex-direction:column;gap:12px;}
+/* ── TICKER ── */
+.ticker-wrap{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;overflow:hidden;background:var(--bg2);}
+.ticker-track{display:flex;gap:0;white-space:nowrap;animation:ticker 30s linear infinite;}
+.ticker-track:hover{animation-play-state:paused;}
+.ticker-item{font-size:.75rem;color:var(--muted);letter-spacing:1px;padding:0 28px;border-right:1px solid var(--border);text-transform:uppercase;}
+.ticker-item strong{color:var(--text);}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* big counter cards */
-.hsp-counters{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.hsp-counter{background:rgba(13,13,20,0.85);border:1px solid var(--border);backdrop-filter:blur(16px);border-radius:16px;padding:18px 16px;text-align:center;transition:border-color .3s,transform .3s;}
-.hsp-counter:hover{transform:translateY(-3px);}
-.hsp-num{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;line-height:1;}
-.hsp-suffix{font-size:1.2rem;font-weight:700;}
-.hsp-label{font-size:.65rem;letter-spacing:.5px;text-transform:uppercase;margin-top:5px;color:var(--muted);}
-
-/* skill orbit badges */
-.hsp-badges{display:flex;flex-wrap:wrap;gap:7px;background:rgba(13,13,20,0.8);border:1px solid var(--border);backdrop-filter:blur(16px);border-radius:14px;padding:14px;}
-.hsp-badge-title{width:100%;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
-.hbadge{padding:5px 12px;border-radius:100px;font-size:.72rem;font-weight:500;border:1px solid;white-space:nowrap;}
-
-/* activity bar */
-.hsp-activity{background:rgba(13,13,20,0.8);border:1px solid var(--border);backdrop-filter:blur(16px);border-radius:14px;padding:14px;}
-.hsp-act-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-.hsp-act-title{font-size:.65rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
-.hsp-act-badge{font-size:.65rem;color:var(--teal);background:rgba(0,212,170,0.1);padding:2px 8px;border-radius:100px;}
-.act-bars{display:flex;align-items:flex-end;gap:3px;height:42px;}
-.act-bar{flex:1;border-radius:2px 2px 0 0;min-height:4px;transition:height .3s;}
-
-/* industry pills */
-.hsp-industries{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
-.hind{background:rgba(13,13,20,0.8);border:1px solid var(--border);border-radius:10px;padding:9px 12px;display:flex;align-items:center;gap:7px;font-size:.72rem;color:var(--muted);transition:border-color .25s;}
-.hind:hover{border-color:rgba(255,255,255,0.2);color:var(--text);}
-.hind-icon{font-size:1rem;}
-
-.scroll-hint{position:absolute;bottom:28px;left:48px;z-index:1;display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.73rem;}
-.scroll-line{width:36px;height:1px;background:linear-gradient(90deg,var(--muted),transparent);}
-
-/* SECTIONS */
-.section{padding:100px 48px;}
+/* ── SECTIONS ── */
+.section{padding:96px 48px;border-bottom:1px solid var(--border);}
 .container{max-width:1200px;margin:0 auto;}
-.s-tag{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
-.s-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.9rem,3.8vw,3rem);font-weight:700;line-height:1.1;color:#fff;}
-.s-title em{font-style:normal;background:linear-gradient(90deg,var(--blue),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.section-eyebrow{font-size:.7rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.section-eyebrow::before{content:'//';color:var(--dim);}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:800;color:var(--text);line-height:1.05;letter-spacing:-1px;}
+.section-title em{font-style:normal;color:var(--gold);}
 
-/* ── EDUCATION inside About ── */
-.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
-.edu-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:20px 22px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;}
-.edu-card:hover{border-color:rgba(245,200,66,0.35);transform:translateY(-3px);}
-.edu-card::before{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;background:var(--gold-dim);filter:blur(24px);}
-.edu-icon{font-size:1.5rem;margin-bottom:10px;}
-.edu-degree{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;color:#fff;margin-bottom:6px;}
-.edu-school{color:var(--gold);font-size:.78rem;margin-bottom:4px;}
-.edu-year{color:var(--muted);font-size:.72rem;}
+/* ── ABOUT ── */
+#about{background:var(--bg);}
+.about-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;margin-top:56px;align-items:start;}
+.about-body p{color:var(--muted);font-size:.95rem;line-height:1.85;margin-bottom:16px;}
+.about-body p strong{color:var(--text);}
+.about-body p em{color:var(--gold);font-style:normal;}
 
-/* ── ABOUT (interactive) ── */
-#about{background:var(--surface);}
-.about-headline{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;line-height:1.35;color:#fff;margin:20px 0 0;}
-.about-headline .hl{position:relative;display:inline-block;}
-.about-headline .hl::after{content:'';position:absolute;left:0;bottom:-3px;height:2px;width:100%;background:linear-gradient(90deg,var(--gold),var(--teal));border-radius:2px;}
-.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-top:52px;}
+/* skill bars */
+.skill-bars{margin-top:32px;}
+.sb-row{margin-bottom:16px;}
+.sb-label{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-bottom:6px;}
+.sb-label span{color:var(--gold);font-weight:600;}
+.sb-track{height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
+.sb-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width 1.2s ease;}
 
-/* typewriter cards */
-.about-cards{display:flex;flex-direction:column;gap:14px;}
-.acard{border:1px solid var(--border);border-radius:16px;padding:20px 22px;background:var(--card);transition:all .3s;cursor:default;position:relative;overflow:hidden;}
-.acard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;}
-.acard:hover{transform:translateX(6px);}
-.acard.ac-gold::before{background:linear-gradient(180deg,var(--gold),var(--gold2));}
-.acard.ac-blue::before{background:linear-gradient(180deg,var(--blue),var(--teal));}
-.acard.ac-purple::before{background:linear-gradient(180deg,var(--purple),var(--pink));}
-.acard.ac-teal::before{background:linear-gradient(180deg,var(--teal),var(--green));}
-.acard-icon{font-size:1.4rem;margin-bottom:8px;}
-.acard-title{font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:700;color:#fff;margin-bottom:5px;}
-.acard-text{font-size:.82rem;color:var(--muted);line-height:1.65;}
-
-/* skill cloud right */
+/* about right — profile card */
 .about-right{}
-.skill-cloud{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px;}
-.s-chip{padding:7px 15px;border-radius:100px;font-size:.78rem;font-weight:500;border:1px solid;transition:all .2s;cursor:default;}
-.s-chip:hover{transform:translateY(-2px);}
-.cg{color:var(--gold);border-color:rgba(245,200,66,0.3);background:rgba(245,200,66,0.05);}
-.cb{color:var(--blue);border-color:rgba(79,142,247,0.3);background:rgba(79,142,247,0.05);}
-.ct{color:var(--teal);border-color:rgba(0,212,170,0.3);background:rgba(0,212,170,0.05);}
-.cp{color:var(--purple);border-color:rgba(155,89,247,0.3);background:rgba(155,89,247,0.05);}
-.ck{color:var(--pink);border-color:rgba(247,89,171,0.3);background:rgba(247,89,171,0.05);}
-.domain-title{font-size:.7rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;}
-.d-tag{display:inline-block;margin:4px;background:var(--card);border:1px solid var(--border);color:var(--muted);padding:5px 12px;border-radius:8px;font-size:.76rem;transition:all .2s;}
-.d-tag:hover{border-color:rgba(255,255,255,0.15);color:var(--text);}
+.profile-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.profile-card-top{padding:28px;border-bottom:1px solid var(--border);}
+.profile-role{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.profile-name{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:var(--text);}
+.profile-rows{padding:0;}
+.pr{display:flex;align-items:center;padding:14px 28px;border-bottom:1px solid var(--border);font-size:.82rem;}
+.pr:last-child{border-bottom:none;}
+.pr-label{color:var(--muted);width:100px;flex-shrink:0;font-size:.75rem;letter-spacing:.5px;text-transform:uppercase;}
+.pr-val{color:var(--text);}
+.pr-val a{color:var(--gold);text-decoration:none;}
+.pr-val a:hover{text-decoration:underline;}
 
-/* quick stats row */
-.about-quick-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px;}
-.qs{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center;transition:border-color .3s;}
-.qs:hover{border-color:rgba(245,200,66,0.3);}
-.qs-num{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:800;color:var(--gold);}
-.qs-label{font-size:.68rem;color:var(--muted);margin-top:4px;}
+/* edu cards inside about */
+.edu-mini{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+.edu-mini-card{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:14px 16px;}
+.emc-deg{font-size:.8rem;font-weight:600;color:var(--text);margin-bottom:4px;}
+.emc-school{font-size:.72rem;color:var(--muted);}
+.emc-year{font-size:.68rem;color:var(--dim);margin-top:3px;}
 
-/* EXPERIENCE */
-#experience{background:var(--bg);}
-.exp-layout{margin-top:56px;display:grid;grid-template-columns:220px 1fr;}
-.exp-nav{border-right:1px solid var(--border);}
-.exp-nav-item{padding:14px 22px;cursor:pointer;border-right:2px solid transparent;transition:all .2s;color:var(--muted);font-size:.85rem;line-height:1.4;}
-.exp-nav-item.active{border-right-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
-.exp-nav-item:hover:not(.active){color:var(--text);}
-.exp-nav-date{font-size:.68rem;color:var(--muted);margin-top:3px;opacity:.7;}
-.exp-content{padding:0 48px;}
-.exp-panel{display:none;}
+/* skills chips */
+.skill-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px;}
+.chip{padding:5px 13px;border:1px solid var(--border2);border-radius:2px;font-size:.73rem;color:var(--muted);transition:all .2s;cursor:default;}
+.chip:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ── EXPERIENCE ── */
+#experience{background:var(--bg2);}
+.exp-layout{display:grid;grid-template-columns:200px 1fr;gap:0;margin-top:56px;}
+.exp-tabs{border-right:1px solid var(--border);}
+.exp-tab{padding:14px 20px;cursor:pointer;font-size:.8rem;color:var(--muted);border-right:2px solid transparent;transition:all .18s;letter-spacing:.3px;}
+.exp-tab.active{color:var(--gold);border-right-color:var(--gold);background:rgba(245,200,66,0.04);}
+.exp-tab:hover:not(.active){color:var(--text);}
+.exp-tab-date{font-size:.68rem;color:var(--dim);margin-top:2px;}
+.exp-panel{display:none;padding:0 48px;}
 .exp-panel.active{display:block;}
-.exp-role{font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:4px;}
-.exp-co{color:var(--gold);font-size:.88rem;margin-bottom:22px;}
-.exp-bullets{list-style:none;}
-.exp-bullets li{padding:10px 0;border-bottom:1px solid var(--border);color:var(--muted);font-size:.88rem;display:flex;gap:12px;line-height:1.6;}
-.exp-bullets li::before{content:'→';color:var(--gold);flex-shrink:0;}
-.exp-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px;}
-.e-tag{background:var(--gold-dim);color:var(--gold);padding:4px 11px;border-radius:6px;font-size:.72rem;}
+.exp-role{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:2px;}
+.exp-co{font-size:.82rem;color:var(--gold);margin-bottom:22px;}
+.exp-ul{list-style:none;}
+.exp-ul li{padding:10px 0;border-bottom:1px solid var(--border);color:var(--muted);font-size:.88rem;display:flex;gap:12px;line-height:1.65;}
+.exp-ul li::before{content:'→';color:var(--gold);flex-shrink:0;}
+.exp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px;}
+.etag{background:rgba(245,200,66,0.06);color:var(--gold);border:1px solid rgba(245,200,66,0.2);padding:3px 10px;border-radius:2px;font-size:.7rem;letter-spacing:.3px;}
 
-/* WORK */
-#work{background:var(--surface);}
-.work-intro{color:var(--muted);font-size:.9rem;margin-top:10px;max-width:540px;}
-.work-filters{display:flex;gap:8px;flex-wrap:wrap;margin:36px 0 32px;}
-.wf{padding:7px 18px;border-radius:100px;font-size:.78rem;cursor:pointer;border:1px solid var(--border);color:var(--muted);background:transparent;transition:all .2s;font-family:'Inter',sans-serif;}
-.wf.active,.wf:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
-.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-.pc{border-radius:18px;border:1px solid var(--border);overflow:hidden;transition:all .3s;position:relative;cursor:default;}
-.pc:hover{transform:translateY(-5px);}
-.pc-top{padding:20px 20px 14px;}
-.pc-icon{font-size:1.6rem;margin-bottom:12px;}
-.pc-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600;}
-.pc h3{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;color:#fff;margin-bottom:7px;line-height:1.3;}
-.pc p{font-size:.78rem;line-height:1.6;margin-bottom:12px;}
-.pc-techs{display:flex;flex-wrap:wrap;gap:5px;}
-.pct{font-size:.67rem;padding:3px 9px;border-radius:100px;border:1px solid;font-weight:500;}
-.pc-dash{margin:0 14px 14px;border-radius:10px;padding:12px;overflow:hidden;}
-.pc-dash-title{font-size:.62rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;opacity:.6;}
+/* ── WORK / PROJECTS ── */
+#work{background:var(--bg);}
+.work-filters{display:flex;gap:2px;margin:40px 0 32px;flex-wrap:wrap;}
+.wf{padding:8px 18px;font-size:.75rem;cursor:pointer;background:transparent;color:var(--muted);border:1px solid var(--border);font-family:'Inter',sans-serif;letter-spacing:.5px;text-transform:uppercase;transition:all .2s;}
+.wf.active,.wf:hover{background:var(--gold);color:#000;border-color:var(--gold);}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+
+/* flip card */
+.pc{height:360px;perspective:1000px;cursor:default;}
+.pc-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .6s ease;}
+.pc:hover .pc-inner{transform:rotateY(180deg);}
+.pc-front,.pc-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;padding:24px;}
+.pc-back{transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;}
+
+/* front face */
+.pc-eyebrow{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.pc-front h3{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.25;}
+.pc-front p{font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:14px;}
+.pc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
+.pct{font-size:.65rem;padding:2px 8px;border:1px solid var(--border2);color:var(--muted);}
+.pc-mini{border-top:1px solid var(--border);padding-top:12px;margin-top:auto;}
+.mini-label{font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
 .mini-bar-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
-.mbl{font-size:.58rem;width:45px;text-align:right;flex-shrink:0;opacity:.5;}
-.mbt{flex:1;height:10px;border-radius:2px;background:rgba(255,255,255,0.05);}
-.mbf{height:100%;border-radius:2px;}
-.mini-kpis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;}
-.mk{text-align:center;padding:6px 4px;border-radius:8px;}
-.mk-val{font-size:.8rem;font-weight:700;}
-.mk-label{font-size:.55rem;opacity:.5;margin-top:1px;}
-.mini-line{width:100%;height:35px;}
-.pc-blue{background:linear-gradient(160deg,#070d1e,#0a1228);}
-.pc-blue .pc-label{color:#4f8ef7;}.pc-blue p{color:#4a5a80;}.pc-blue .pc-dash{background:rgba(79,142,247,0.06);border:1px solid rgba(79,142,247,0.12);}.pc-blue .pct{color:#4f8ef7;border-color:rgba(79,142,247,0.3);background:rgba(79,142,247,0.06);}
-.pc-green{background:linear-gradient(160deg,#030e08,#041610);}
-.pc-green .pc-label{color:#00d478;}.pc-green p{color:#2a5a3a;}.pc-green .pc-dash{background:rgba(0,212,100,0.05);border:1px solid rgba(0,212,100,0.1);}.pc-green .pct{color:#00d478;border-color:rgba(0,212,120,0.3);background:rgba(0,212,120,0.06);}
-.pc-purple{background:linear-gradient(160deg,#0b0818,#110d22);}
-.pc-purple .pc-label{color:#9b59f7;}.pc-purple p{color:#4a3070;}.pc-purple .pc-dash{background:rgba(155,89,247,0.05);border:1px solid rgba(155,89,247,0.12);}.pc-purple .pct{color:#9b59f7;border-color:rgba(155,89,247,0.3);background:rgba(155,89,247,0.06);}
-.pc-orange{background:linear-gradient(160deg,#110800,#1a0e00);}
-.pc-orange .pc-label{color:#f57814;}.pc-orange p{color:#7a4010;}.pc-orange .pc-dash{background:rgba(245,120,20,0.05);border:1px solid rgba(245,120,20,0.12);}.pc-orange .pct{color:#f57814;border-color:rgba(245,120,20,0.3);background:rgba(245,120,20,0.06);}
-.pc-gold{background:linear-gradient(160deg,#100e00,#181400);}
-.pc-gold .pc-label{color:var(--gold);}.pc-gold p{color:#6a5a10;}.pc-gold .pc-dash{background:rgba(245,200,66,0.05);border:1px solid rgba(245,200,66,0.12);}.pc-gold .pct{color:var(--gold);border-color:rgba(245,200,66,0.3);background:rgba(245,200,66,0.06);}
-.pc-pink{background:linear-gradient(160deg,#110818,#190d22);}
-.pc-pink .pc-label{color:var(--pink);}.pc-pink p{color:#6a2050;}.pc-pink .pc-dash{background:rgba(247,89,171,0.05);border:1px solid rgba(247,89,171,0.12);}.pc-pink .pct{color:var(--pink);border-color:rgba(247,89,171,0.3);background:rgba(247,89,171,0.06);}
-.pc-teal{background:linear-gradient(160deg,#030e0d,#041412);}
-.pc-teal .pc-label{color:var(--teal);}.pc-teal p{color:#1a5a50;}.pc-teal .pc-dash{background:rgba(0,212,170,0.05);border:1px solid rgba(0,212,170,0.12);}.pc-teal .pct{color:var(--teal);border-color:rgba(0,212,170,0.3);background:rgba(0,212,170,0.06);}
-.pc-red{background:linear-gradient(160deg,#110606,#1a0a0a);}
-.pc-red .pc-label{color:#e74c3c;}.pc-red p{color:#6a2020;}.pc-red .pc-dash{background:rgba(231,76,60,0.05);border:1px solid rgba(231,76,60,0.12);}.pc-red .pct{color:#e74c3c;border-color:rgba(231,76,60,0.3);background:rgba(231,76,60,0.06);}
+.mbl{font-size:.58rem;width:50px;text-align:right;flex-shrink:0;color:var(--dim);}
+.mbt{flex:1;height:8px;border-radius:1px;background:var(--border2);}
+.mbf{height:100%;border-radius:1px;}
+.mini-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.mk{text-align:center;padding:5px 3px;background:var(--bg3);}
+.mk-val{font-size:.78rem;font-weight:700;}
+.mk-label{font-size:.52rem;color:var(--dim);margin-top:1px;}
+.mini-line{width:100%;height:32px;}
+
+/* back face */
+.pc-back-title{font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:12px;}
+.bkpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px;}
+.bkpi{background:var(--bg3);padding:8px 4px;text-align:center;}
+.bkpi-val{font-size:.95rem;font-weight:700;}
+.bkpi-label{font-size:.55rem;color:var(--dim);margin-top:2px;}
+.back-chart{width:100%;height:56px;display:block;margin-bottom:10px;}
+.bbar-row{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+.bbl{font-size:.62rem;width:72px;text-align:right;flex-shrink:0;color:var(--dim);}
+.bbt{flex:1;height:10px;background:var(--border);}
+.bbf{height:100%;}
+
+/* color themes per card */
+.th-blue .pc-eyebrow{color:#4f8ef7;}.th-blue .pc-front{background:#070d1e;}.th-blue .pc-back{background:#070d1e;}.th-blue .mbf,.th-blue .bbf{background:#4f8ef7;}.th-blue .mk-val,.th-blue .bkpi-val{color:#4f8ef7;}
+.th-green .pc-eyebrow{color:#00d478;}.th-green .pc-front{background:#030e08;}.th-green .pc-back{background:#030e08;}.th-green .mbf,.th-green .bbf{background:#00d478;}.th-green .mk-val,.th-green .bkpi-val{color:#00d478;}
+.th-orange .pc-eyebrow{color:#f57814;}.th-orange .pc-front{background:#110800;}.th-orange .pc-back{background:#110800;}.th-orange .mbf,.th-orange .bbf{background:#f57814;}.th-orange .mk-val,.th-orange .bkpi-val{color:#f57814;}
+.th-purple .pc-eyebrow{color:#9b59f7;}.th-purple .pc-front{background:#0b0818;}.th-purple .pc-back{background:#0b0818;}.th-purple .mbf,.th-purple .bbf{background:#9b59f7;}.th-purple .mk-val,.th-purple .bkpi-val{color:#9b59f7;}
+.th-pink .pc-eyebrow{color:#f759ab;}.th-pink .pc-front{background:#110818;}.th-pink .pc-back{background:#110818;}.th-pink .mbf,.th-pink .bbf{background:#f759ab;}.th-pink .mk-val,.th-pink .bkpi-val{color:#f759ab;}
+.th-gold .pc-eyebrow{color:#f5c842;}.th-gold .pc-front{background:#100e00;}.th-gold .pc-back{background:#100e00;}.th-gold .mbf,.th-gold .bbf{background:#f5c842;}.th-gold .mk-val,.th-gold .bkpi-val{color:#f5c842;}
+.th-teal .pc-eyebrow{color:#00d4aa;}.th-teal .pc-front{background:#030e0d;}.th-teal .pc-back{background:#030e0d;}.th-teal .mbf,.th-teal .bbf{background:#00d4aa;}.th-teal .mk-val,.th-teal .bkpi-val{color:#00d4aa;}
+.th-red .pc-eyebrow{color:#e74c3c;}.th-red .pc-front{background:#110606;}.th-red .pc-back{background:#110606;}.th-red .mbf,.th-red .bbf{background:#e74c3c;}.th-red .mk-val,.th-red .bkpi-val{color:#e74c3c;}
 .hidden{display:none!important;}
 
-/* CONTACT */
-#contact{background:var(--bg);position:relative;overflow:hidden;}
-#contact::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(245,200,66,0.05),transparent 70%);}
-.contact-inner{position:relative;z-index:1;text-align:center;max-width:680px;margin:0 auto;}
-.hire-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.2);padding:6px 16px;border-radius:100px;font-size:.75rem;color:var(--teal);margin-bottom:20px;}
-.hire-dot2{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite;}
-.contact-inner p{color:var(--muted);margin:18px 0 44px;font-size:.95rem;line-height:1.75;}
-.contact-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-.contact-btn{display:flex;align-items:center;gap:10px;padding:15px 30px;border-radius:14px;text-decoration:none;font-size:.92rem;font-weight:600;transition:all .28s;border:1px solid;}
-.contact-btn:hover{transform:translateY(-4px);}
-.cb-mail{background:linear-gradient(135deg,rgba(245,200,66,0.12),rgba(245,200,66,0.06));color:var(--gold);border-color:rgba(245,200,66,0.25);}
-.cb-mail:hover{background:rgba(245,200,66,0.18);box-shadow:0 10px 30px rgba(245,200,66,0.15);}
-.cb-phone{background:rgba(0,212,170,0.08);color:var(--teal);border-color:rgba(0,212,170,0.2);}
-.cb-phone:hover{background:rgba(0,212,170,0.14);box-shadow:0 10px 30px rgba(0,212,170,0.12);}
-.cb-resume{background:rgba(79,142,247,0.08);color:var(--blue);border-color:rgba(79,142,247,0.2);}
-.cb-resume:hover{background:rgba(79,142,247,0.14);box-shadow:0 10px 30px rgba(79,142,247,0.12);}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);z-index:999;display:none;align-items:center;justify-content:center;}
+/* ── IMPACT ── */
+#impact{background:var(--bg2);}
+.impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);margin-top:56px;}
+.impact-cell{padding:36px 28px;border-right:1px solid var(--border);}
+.impact-cell:last-child{border-right:none;}
+.ic-num{font-family:'Space Grotesk',sans-serif;font-size:3rem;font-weight:800;color:var(--gold);line-height:1;}
+.ic-label{font-size:.78rem;color:var(--muted);margin-top:10px;line-height:1.5;}
+.ic-desc{font-size:.75rem;color:var(--dim);margin-top:8px;line-height:1.55;}
+
+/* ── CONTACT ── */
+#contact{background:var(--bg);padding:96px 48px;}
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:56px;}
+.contact-left p{color:var(--muted);font-size:.95rem;line-height:1.8;margin-bottom:24px;}
+.contact-cards{display:flex;flex-direction:column;gap:2px;}
+.cc{display:flex;align-items:center;gap:16px;padding:20px 24px;background:var(--bg2);border:1px solid var(--border);text-decoration:none;transition:all .2s;}
+.cc:hover{border-color:var(--gold);background:var(--bg3);}
+.cc-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;background:var(--bg3);border:1px solid var(--border);}
+.cc-info{}
+.cc-title{font-size:.82rem;font-weight:600;color:var(--text);}
+.cc-val{font-size:.75rem;color:var(--muted);margin-top:2px;}
+.cc-arrow{margin-left:auto;color:var(--dim);font-size:.9rem;transition:color .2s;}
+.cc:hover .cc-arrow{color:var(--gold);}
+.avail-strip{margin-top:20px;padding:16px 20px;background:rgba(245,200,66,0.04);border:1px solid rgba(245,200,66,0.15);display:flex;align-items:center;gap:12px;font-size:.82rem;}
+.avail-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.avail-strip span{color:var(--muted);}
+.avail-strip strong{color:var(--text);}
+
+/* resume modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:999;display:none;align-items:center;justify-content:center;}
 .modal-overlay.open{display:flex;}
-.modal-box{background:#0d0d18;border:1px solid var(--border);border-radius:20px;padding:36px;max-width:420px;width:90%;position:relative;animation:modalIn .3s ease;}
-@keyframes modalIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
-.modal-close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;}
-.modal-title{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:8px;}
-.modal-sub{color:var(--muted);font-size:.85rem;margin-bottom:24px;line-height:1.6;}
-.modal-btns{display:flex;flex-direction:column;gap:10px;}
-.modal-btn{display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:12px;font-size:.88rem;font-weight:600;text-decoration:none;transition:all .2s;border:1px solid;}
-.modal-btn:hover{transform:translateX(4px);}
-.mb-pdf{background:rgba(231,76,60,0.08);color:#e74c3c;border-color:rgba(231,76,60,0.2);}
-.mb-mail{background:rgba(245,200,66,0.08);color:var(--gold);border-color:rgba(245,200,66,0.2);}
+.modal-box{background:var(--bg2);border:1px solid var(--border2);padding:32px;max-width:400px;width:90%;animation:mIn .25s ease;}
+@keyframes mIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+.modal-close{float:right;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;margin-top:-4px;}
+.modal-title{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:6px;}
+.modal-sub{font-size:.82rem;color:var(--muted);margin-bottom:20px;line-height:1.55;clear:both;}
+.modal-btns{display:flex;flex-direction:column;gap:8px;}
+.mbtn{display:flex;align-items:center;gap:10px;padding:12px 16px;font-size:.85rem;font-weight:600;text-decoration:none;border:1px solid var(--border2);color:var(--text);transition:all .2s;}
+.mbtn:hover{border-color:var(--gold);color:var(--gold);}
 
-.bar-row{display:flex;align-items:center;gap:7px;margin-bottom:6px;}
-.bl{font-size:.62rem;color:#555;flex-shrink:0;text-align:right;}
-.bt{flex:1;height:12px;border-radius:2px;background:rgba(255,255,255,0.04);}
-.bf{height:100%;border-radius:2px;display:flex;align-items:center;justify-content:flex-end;padding-right:4px;}
-.bf span{font-size:.56rem;color:rgba(255,255,255,.65);font-weight:600;}
+footer{padding:24px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg2);}
+.footer-name{font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:700;color:var(--text);}
+.footer-name span{color:var(--muted);font-weight:400;}
+.footer-note{font-size:.72rem;color:var(--dim);}
 
-footer{padding:28px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:.76rem;}
-
-@media(max-width:1100px){
-  nav{padding:12px 20px;}.nav-links{display:none;}.hero-right{display:none;}
-  #hero{padding:80px 20px 40px;}.section{padding:70px 20px;}
-  .about-layout{grid-template-columns:1fr;}.about-quick-stats{grid-template-columns:repeat(2,1fr);}
-  .exp-layout{grid-template-columns:1fr;}.exp-nav{border-right:none;border-bottom:1px solid var(--border);display:flex;overflow-x:auto;}
-  .exp-nav-item{border-right:none;border-bottom:2px solid transparent;white-space:nowrap;}.exp-nav-item.active{border-bottom-color:var(--gold);}
-  .exp-content{padding:20px 0;}.proj-grid{grid-template-columns:1fr 1fr;}.edu-grid{grid-template-columns:1fr;}
+@media(max-width:1024px){
+  nav{padding:0 20px;}.nav-links{display:none;}
+  #hero{padding:80px 20px 48px;}
+  .section{padding:64px 20px;}
+  .about-layout{grid-template-columns:1fr;}
+  .exp-layout{grid-template-columns:1fr;}
+  .exp-tabs{border-right:none;border-bottom:1px solid var(--border);display:flex;overflow-x:auto;margin-bottom:32px;}
+  .exp-tab{border-right:none;border-bottom:2px solid transparent;white-space:nowrap;}
+  .exp-tab.active{border-bottom-color:var(--gold);}
+  .exp-panel{padding:0;}
+  .proj-grid{grid-template-columns:1fr 1fr;background:none;gap:12px;}
+  .pc{border:1px solid var(--border);}
+  .impact-grid{grid-template-columns:1fr 1fr;}
+  .impact-cell{border-right:none;border-bottom:1px solid var(--border);}
+  .contact-layout{grid-template-columns:1fr;}
   footer{flex-direction:column;gap:8px;text-align:center;}
 }
-@media(max-width:600px){.proj-grid{grid-template-columns:1fr;}}
+@media(max-width:600px){.proj-grid{grid-template-columns:1fr;}.hero-stats{flex-direction:column;gap:0;}.h-stat{border-right:none;border-bottom:1px solid var(--border);padding:16px 0;margin-right:0;}}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-brand">
-    <div class="nav-monogram"><span class="nm-text">AB</span></div>
-    <div class="nav-name">Anay Biswas<span>BI Lead · Data Analytics · Noida</span></div>
-  </a>
+  <a href="#hero" class="nav-logo">ANAY<span>.</span></a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#work">Work</a></li>
+    <li><a href="#impact">Impact</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-hire"><span class="hire-dot"></span>Hire Me</a>
+  <a href="#contact" class="nav-cta">Let's Work Together</a>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="grid-bg"></div>
-  <div class="radial-glow"></div>
-  <canvas id="pCanvas" style="position:absolute;inset:0;z-index:0;"></canvas>
-  <div class="hero-content">
-    <div class="hero-pill"><span class="hero-pill-dot"></span>Available for global opportunities &amp; consulting</div>
-    <h1 class="hero-name"><div>Anay</div><div class="grad">Biswas</div></h1>
-    <p class="hero-role"><strong>Senior BI Lead &amp; Data Analytics Professional</strong> — 7.5+ years delivering end-to-end BI solutions for 10+ global clients across manufacturing, finance, HR, sales, logistics &amp; procurement.</p>
-    <div class="hero-actions">
-      <a href="#work" class="btn-glass btn-gold">Explore my work ↓</a>
-      <a href="#contact" class="btn-glass">Get in touch</a>
-      <a href="#" onclick="openResume(event)" class="btn-glass">⬇ Resume</a>
+  <div class="hero-grid-bg"></div>
+  <div style="position:relative;z-index:1;">
+    <div class="hero-tag">Open to New Opportunities</div>
+    <h1 class="hero-name">ANAY<br><span class="outline">BISWAS</span></h1>
+    <p class="hero-sub"><strong>Senior BI Lead &amp; Data Analytics Professional</strong> — 7.5+ years turning messy enterprise data into <em>dashboards that drive decisions</em>. Expert in Qlik, Power BI, MS Fabric &amp; cloud analytics at scale.</p>
+    <div class="hero-btns">
+      <a href="#work" class="btn-primary">View My Work →</a>
+      <a href="#contact" class="btn-ghost">Get In Touch ↗</a>
+      <a href="#" onclick="openResume(event)" class="btn-ghost">⬇ Resume</a>
+    </div>
+    <div class="hero-stats">
+      <div class="h-stat"><div class="h-stat-num">7.5<span>+</span></div><div class="h-stat-label">Years Experience</div></div>
+      <div class="h-stat"><div class="h-stat-num">18<span>+</span></div><div class="h-stat-label">Projects Delivered</div></div>
+      <div class="h-stat"><div class="h-stat-num">10<span>+</span></div><div class="h-stat-label">Global Clients</div></div>
+      <div class="h-stat"><div class="h-stat-num">5<span>+</span></div><div class="h-stat-label">Industries Served</div></div>
     </div>
   </div>
-
-  <!-- ── HERO RIGHT: INTERACTIVE STATS PANEL ── -->
-  <div class="hero-right">
-    <div class="hero-stats-panel">
-
-      <!-- Counter cards -->
-      <div class="hsp-counters">
-        <div class="hsp-counter" style="border-color:rgba(245,200,66,0.2)">
-          <div class="hsp-num" style="color:var(--gold)"><span id="cnt-yrs">0</span><span class="hsp-suffix" style="color:var(--gold2)">+</span></div>
-          <div class="hsp-label">Years Experience</div>
-        </div>
-        <div class="hsp-counter" style="border-color:rgba(0,212,170,0.2)">
-          <div class="hsp-num" style="color:var(--teal)"><span id="cnt-proj">0</span><span class="hsp-suffix" style="color:var(--teal)">+</span></div>
-          <div class="hsp-label">Projects Delivered</div>
-        </div>
-        <div class="hsp-counter" style="border-color:rgba(79,142,247,0.2)">
-          <div class="hsp-num" style="color:var(--blue)"><span id="cnt-clients">0</span><span class="hsp-suffix" style="color:var(--blue)">+</span></div>
-          <div class="hsp-label">Global Clients</div>
-        </div>
-        <div class="hsp-counter" style="border-color:rgba(155,89,247,0.2)">
-          <div class="hsp-num" style="color:var(--purple)"><span id="cnt-ind">0</span><span class="hsp-suffix" style="color:var(--purple)">+</span></div>
-          <div class="hsp-label">Industries Served</div>
-        </div>
-      </div>
-
-      <!-- Core stack badges -->
-      <div class="hsp-badges">
-        <div class="hsp-badge-title">Core Stack</div>
-        <span class="hbadge" style="color:var(--gold);border-color:rgba(245,200,66,0.3);background:rgba(245,200,66,0.06)">Qlik SaaS</span>
-        <span class="hbadge" style="color:var(--blue);border-color:rgba(79,142,247,0.3);background:rgba(79,142,247,0.06)">Power BI</span>
-        <span class="hbadge" style="color:var(--teal);border-color:rgba(0,212,170,0.3);background:rgba(0,212,170,0.06)">MS Fabric</span>
-        <span class="hbadge" style="color:var(--purple);border-color:rgba(155,89,247,0.3);background:rgba(155,89,247,0.06)">PySpark</span>
-        <span class="hbadge" style="color:var(--pink);border-color:rgba(247,89,171,0.3);background:rgba(247,89,171,0.06)">AWS</span>
-        <span class="hbadge" style="color:var(--gold);border-color:rgba(245,200,66,0.2);background:rgba(245,200,66,0.04)">SQL</span>
-      </div>
-
-      <!-- Activity bars -->
-      <div class="hsp-activity">
-        <div class="hsp-act-header">
-          <span class="hsp-act-title">Project Activity</span>
-          <span class="hsp-act-badge">7.5 yr span</span>
-        </div>
-        <div class="act-bars" id="actBars"></div>
-      </div>
-
-      <!-- Industry presence -->
-      <div class="hsp-industries">
-        <div class="hind"><span class="hind-icon">🏭</span>Manufacturing</div>
-        <div class="hind"><span class="hind-icon">💰</span>Finance</div>
-        <div class="hind"><span class="hind-icon">👥</span>HR Analytics</div>
-        <div class="hind"><span class="hind-icon">🚚</span>Logistics</div>
-        <div class="hind"><span class="hind-icon">📦</span>Procurement</div>
-        <div class="hind"><span class="hind-icon">📈</span>Sales BI</div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="scroll-hint"><div class="scroll-line"></div>Scroll to explore</div>
+  <div class="scroll-label">Scroll</div>
 </section>
 
-<!-- ── ABOUT (with education inside) ── -->
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<!-- ABOUT -->
 <section id="about" class="section">
   <div class="container">
-    <div class="s-tag">00 — About</div>
-    <h2 class="s-title">I don't just build dashboards —<br>I build <em>clarity</em></h2>
-    <p class="about-headline" style="font-size:1rem;font-family:'Inter',sans-serif;color:var(--muted);font-weight:400;margin-top:14px;line-height:1.7;max-width:680px;">Senior BI Lead turning messy enterprise data into decisions that move the needle — across 3 platforms, 7.5 years, and 18+ end-to-end projects.</p>
-
+    <div class="section-eyebrow">01 About</div>
+    <h2 class="section-title">THE <em>ANALYST</em></h2>
     <div class="about-layout">
-      <!-- Left: story cards -->
-      <div class="about-cards">
-        <div class="acard ac-gold">
-          <div class="acard-icon">🏗️</div>
-          <div class="acard-title">Architecture First</div>
-          <div class="acard-text">I design analytics ecosystems from the ground up — data models, pipeline architecture, semantic layers, and multi-node cluster deployments that scale without breaking.</div>
+      <div>
+        <div class="about-body">
+          <p>I'm a <strong>Senior BI Lead</strong> with 7.5+ years building enterprise analytics platforms that actually get used. My work spans the full stack — from raw SQL and cloud pipeline design to pixel-perfect dashboards that Finance directors and Operations teams rely on daily.</p>
+          <p>At <strong>Motherson Technology Services Ltd.</strong>, I've progressed from Engineer Trainee to Module Leader — leading BI across HR, Finance, Manufacturing, Sales and Procurement for <strong>10+ global clients</strong> across 5+ industries simultaneously. I thrive in that complexity.</p>
+          <p>My signature move? <em>Automation</em>. I've consistently eliminated 40–60% of manual reporting effort by architecting smart pipelines and cloud-native BI. Good BI doesn't just look sharp — it saves teams hours every week.</p>
         </div>
-        <div class="acard ac-blue">
-          <div class="acard-icon">☁️</div>
-          <div class="acard-title">Cloud-Native Delivery</div>
-          <div class="acard-text">From on-prem Qlik to AWS EC2 multi-region hosting to MS Fabric on Azure — I've led migrations that modernise data stacks without disrupting live reporting.</div>
+        <div class="skill-bars" id="skillBars">
+          <div class="sb-row"><div class="sb-label"><span>Qlik SaaS / Qliksense / Qlikview</span><span>95%</span></div><div class="sb-track"><div class="sb-fill" data-w="95" style="width:0%"></div></div></div>
+          <div class="sb-row"><div class="sb-label"><span>Power BI / Tableau</span><span>88%</span></div><div class="sb-track"><div class="sb-fill" data-w="88" style="width:0%"></div></div></div>
+          <div class="sb-row"><div class="sb-label"><span>SQL / Python / PySpark</span><span>85%</span></div><div class="sb-track"><div class="sb-fill" data-w="85" style="width:0%"></div></div></div>
+          <div class="sb-row"><div class="sb-label"><span>MS Fabric / AWS / Cloud</span><span>80%</span></div><div class="sb-track"><div class="sb-fill" data-w="80" style="width:0%"></div></div></div>
+          <div class="sb-row"><div class="sb-label"><span>ETL / Data Modelling / Pipelines</span><span>90%</span></div><div class="sb-track"><div class="sb-fill" data-w="90" style="width:0%"></div></div></div>
         </div>
-        <div class="acard ac-purple">
-          <div class="acard-icon">🤝</div>
-          <div class="acard-title">Stakeholder-Driven</div>
-          <div class="acard-text">As client SME and tech-lead, I translate ambiguous business pain points into precise analytics requirements — then ship dashboards that executives actually use.</div>
-        </div>
-        <div class="acard ac-teal">
-          <div class="acard-icon">🤖</div>
-          <div class="acard-title">ML-Augmented BI</div>
-          <div class="acard-text">Integrating AutoML, time-series forecasting, and anomaly detection directly into Qlik and Power BI — elevating reporting into forward-looking intelligence.</div>
+        <div class="skill-chips" style="margin-top:28px;">
+          <span class="chip">Manufacturing</span><span class="chip">HR Analytics</span><span class="chip">Finance &amp; P&L</span><span class="chip">Sales</span><span class="chip">Logistics</span><span class="chip">Procurement</span><span class="chip">Spend Intelligence</span><span class="chip">Operational BI</span><span class="chip">AutoML</span><span class="chip">Agile</span><span class="chip">Team Leadership</span><span class="chip">Solution Architecture</span>
         </div>
       </div>
-
-      <!-- Right: skills + education + timeline -->
       <div class="about-right">
-        <div class="skill-cloud">
-          <span class="s-chip cg">Qlik SaaS</span><span class="s-chip cg">Qliksense</span><span class="s-chip cg">Qlikview</span>
-          <span class="s-chip cb">Power BI</span><span class="s-chip cb">Tableau</span>
-          <span class="s-chip ct">MS Fabric</span><span class="s-chip ct">AWS EC2</span><span class="s-chip ct">S3</span><span class="s-chip ct">OneLake</span>
-          <span class="s-chip cp">Python</span><span class="s-chip cp">PySpark</span><span class="s-chip cp">SQL</span>
-          <span class="s-chip ck">AutoML</span><span class="s-chip ck">Time Series</span><span class="s-chip ck">Classification</span>
-          <span class="s-chip cg">Qlik CLI</span><span class="s-chip cb">NPrinting</span><span class="s-chip ct">Dataflows</span>
-        </div>
-        <div style="margin-top:22px">
-          <div class="domain-title">Domain Expertise</div>
-          <div>
-            <span class="d-tag">Manufacturing</span><span class="d-tag">HR Analytics</span><span class="d-tag">Finance &amp; P&L</span>
-            <span class="d-tag">Sales</span><span class="d-tag">Logistics</span><span class="d-tag">Procurement</span>
-            <span class="d-tag">People Analytics</span><span class="d-tag">Operational BI</span><span class="d-tag">Spend Intelligence</span>
+        <div class="profile-card">
+          <div class="profile-card-top">
+            <div class="profile-role">Role</div>
+            <div class="profile-name">Senior BI Lead &amp; Data Analytics Professional</div>
+          </div>
+          <div class="profile-rows">
+            <div class="pr"><span class="pr-label">Company</span><span class="pr-val">Motherson Technology Services Ltd.</span></div>
+            <div class="pr"><span class="pr-label">Experience</span><span class="pr-val">7.5+ Years</span></div>
+            <div class="pr"><span class="pr-label">Projects</span><span class="pr-val">18+ Delivered</span></div>
+            <div class="pr"><span class="pr-label">Location</span><span class="pr-val">Noida, India</span></div>
+            <div class="pr"><span class="pr-label">Email</span><span class="pr-val"><a href="mailto:itzmeanay@gmail.com">itzmeanay@gmail.com</a></span></div>
+            <div class="pr"><span class="pr-label">LinkedIn</span><span class="pr-val"><a href="https://linkedin.com/in/anaybiswas" target="_blank">anaybiswas ↗</a></span></div>
+            <div class="pr"><span class="pr-label">Phone</span><span class="pr-val">+91 7001987280</span></div>
           </div>
         </div>
-
-        <!-- Education inside About -->
-        <div style="margin-top:26px">
-          <div class="domain-title">Education</div>
-          <div class="edu-grid">
-            <div class="edu-card">
-              <div class="edu-icon">🎓</div>
-              <div class="edu-degree">PGP — Data Science &amp; Business Analytics</div>
-              <div class="edu-school">Texas McCombs · Great Lakes Institute</div>
-              <div class="edu-year">2021 – 2022</div>
+        <div style="margin-top:16px;">
+          <div style="font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:10px;">Education</div>
+          <div class="edu-mini">
+            <div class="edu-mini-card">
+              <div class="emc-deg">PGP — Data Science &amp; Business Analytics</div>
+              <div class="emc-school">Texas McCombs · Great Lakes Institute</div>
+              <div class="emc-year">2021 – 2022</div>
             </div>
-            <div class="edu-card">
-              <div class="edu-icon">💻</div>
-              <div class="edu-degree">B.Tech — Computer Science &amp; Engineering</div>
-              <div class="edu-school">IIIT Una, Himachal Pradesh</div>
-              <div class="edu-year">2014 – 2018</div>
+            <div class="edu-mini-card">
+              <div class="emc-deg">B.Tech — Computer Science &amp; Engineering</div>
+              <div class="emc-school">IIIT Una, Himachal Pradesh</div>
+              <div class="emc-year">2014 – 2018</div>
             </div>
           </div>
-        </div>
-
-        <!-- Career timeline -->
-        <div style="margin-top:22px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;">
-          <div style="font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Career Progression at MTSL</div>
-          <div id="careerTimeline"></div>
         </div>
       </div>
     </div>
@@ -434,68 +351,68 @@ footer{padding:28px 48px;border-top:1px solid var(--border);display:flex;justify
 <!-- EXPERIENCE -->
 <section id="experience" class="section">
   <div class="container">
-    <div class="s-tag">01 — Experience</div>
-    <h2 class="s-title">Progressive growth<br><em>at one company</em></h2>
+    <div class="section-eyebrow">02 Experience</div>
+    <h2 class="section-title">PROGRESSIVE <em>GROWTH</em></h2>
     <div class="exp-layout">
-      <div class="exp-nav">
-        <div class="exp-nav-item active" onclick="showExp(0,this)">Module Leader<div class="exp-nav-date">2024 – Present</div></div>
-        <div class="exp-nav-item" onclick="showExp(1,this)">Lead Engineer<div class="exp-nav-date">2022 – 2024</div></div>
-        <div class="exp-nav-item" onclick="showExp(2,this)">Senior SE<div class="exp-nav-date">2021 – 2022</div></div>
-        <div class="exp-nav-item" onclick="showExp(3,this)">Software Engineer<div class="exp-nav-date">2019 – 2021</div></div>
-        <div class="exp-nav-item" onclick="showExp(4,this)">Engineer Trainee<div class="exp-nav-date">2018 – 2019</div></div>
+      <div class="exp-tabs">
+        <div class="exp-tab active" onclick="showExp(0,this)">Module Leader<div class="exp-tab-date">2024 – Present</div></div>
+        <div class="exp-tab" onclick="showExp(1,this)">Lead Engineer<div class="exp-tab-date">2022 – 2024</div></div>
+        <div class="exp-tab" onclick="showExp(2,this)">Senior SE<div class="exp-tab-date">2021 – 2022</div></div>
+        <div class="exp-tab" onclick="showExp(3,this)">Software Engineer<div class="exp-tab-date">2019 – 2021</div></div>
+        <div class="exp-tab" onclick="showExp(4,this)">Engineer Trainee<div class="exp-tab-date">2018 – 2019</div></div>
       </div>
-      <div class="exp-content">
+      <div>
         <div class="exp-panel active" id="ep0">
           <div class="exp-role">Module Leader</div>
           <div class="exp-co">Motherson Technology Services Ltd. (MTSL) · Noida · Aug 2024 – Present</div>
-          <ul class="exp-bullets">
+          <ul class="exp-ul">
             <li>Leading BI pipeline management across Qlik &amp; Power BI, overseeing 5+ concurrent client engagements and consistently meeting delivery deadlines.</li>
             <li>Serving as Client SME for analytics solution architecture, translating business requirements into scalable BI frameworks aligned with industry best practices.</li>
             <li>Spearheading cloud migration POCs to MS Fabric — pipelines, dataflows, PySpark query conversion, and OneLake connectivity — reducing legacy infrastructure overhead by ~25%.</li>
             <li>Acting as Tech Lead for BI &amp; SaaS cloud solutions (MS Fabric, AWS), providing technical advisory to existing and new clients.</li>
-            <li>Mentoring a team of BI resources and reviewing deliverables for quality, reducing post-delivery rework by ~40%.</li>
+            <li>Mentoring BI resources and reviewing deliverables for quality, reducing post-delivery rework by ~40%.</li>
           </ul>
-          <div class="exp-tags"><span class="e-tag">MS Fabric</span><span class="e-tag">PySpark</span><span class="e-tag">OneLake</span><span class="e-tag">Qlik</span><span class="e-tag">Power BI</span><span class="e-tag">AWS</span><span class="e-tag">~25% infra saving</span><span class="e-tag">~40% rework ↓</span></div>
+          <div class="exp-tags"><span class="etag">MS Fabric</span><span class="etag">PySpark</span><span class="etag">OneLake</span><span class="etag">Qlik</span><span class="etag">Power BI</span><span class="etag">AWS</span><span class="etag">~25% infra saving</span><span class="etag">~40% rework ↓</span></div>
         </div>
         <div class="exp-panel" id="ep1">
           <div class="exp-role">Lead Engineer – Business Intelligence</div>
           <div class="exp-co">Motherson Technology Services Ltd. (MTSL) · Noida · Jul 2022 – Aug 2024</div>
-          <ul class="exp-bullets">
-            <li>Drove end-to-end migration of BI apps to Qlik Sense SaaS, enabling automation, alerting, and AutoML capabilities to improve overall reporting efficiency.</li>
+          <ul class="exp-ul">
+            <li>Drove end-to-end migration of BI apps to Qlik Sense SaaS, enabling automation, alerting, and AutoML capabilities.</li>
             <li>Collaborated with business stakeholders and mentored a team of 4+ BI engineers, establishing coding standards and best practices.</li>
-            <li>Managed Qlik on-premise infrastructure end-to-end: licensing, upgrades, performance tuning, and health monitoring.</li>
-            <li>Architected Qlik Sense on AWS EC2 across multiple regions using S3 as data source; automated tasks via AWS and Qlik CLI, saving ~15 hours/week of manual operational effort.</li>
+            <li>Managed Qlik on-premise infrastructure: licensing, upgrades, performance tuning, and health monitoring.</li>
+            <li>Architected Qlik Sense on AWS EC2 across multiple regions using S3 as data source; automated tasks via AWS and Qlik CLI, saving ~15 hours/week of manual effort.</li>
           </ul>
-          <div class="exp-tags"><span class="e-tag">Qlik Sense SaaS</span><span class="e-tag">AWS EC2</span><span class="e-tag">S3</span><span class="e-tag">Qlik CLI</span><span class="e-tag">AutoML</span><span class="e-tag">~15 hrs/wk saved</span></div>
+          <div class="exp-tags"><span class="etag">Qlik Sense SaaS</span><span class="etag">AWS EC2</span><span class="etag">S3</span><span class="etag">Qlik CLI</span><span class="etag">AutoML</span><span class="etag">~15 hrs/wk saved</span></div>
         </div>
         <div class="exp-panel" id="ep2">
           <div class="exp-role">Senior Software Engineer – BI &amp; Analytics</div>
           <div class="exp-co">Motherson Technology Services Ltd. (MTSL) · Noida · Aug 2021 – Jul 2022</div>
-          <ul class="exp-bullets">
-            <li>Developed a comprehensive HR Analytics solution in Qlik Sense across 20+ business units globally, consolidating previously siloed people data into a single analytics layer.</li>
+          <ul class="exp-ul">
+            <li>Developed a comprehensive HR Analytics solution in Qlik Sense across 20+ business units globally, consolidating siloed people data into a single analytics layer.</li>
             <li>Built Finance dashboards in Power BI covering management reporting, P&amp;L analysis, and monthly performance reviews — reducing manual reporting effort by ~50%.</li>
-            <li>Configured a Qlik Sense Enterprise multi-node cluster across multiple regions, improving system reliability and scalability for enterprise-scale deployments.</li>
+            <li>Configured a Qlik Sense Enterprise multi-node cluster across multiple regions, improving reliability and scalability.</li>
             <li>Administered Qlik security framework: security rules, services, nodes, tokens, and access management.</li>
           </ul>
-          <div class="exp-tags"><span class="e-tag">Qlik Sense Enterprise</span><span class="e-tag">Power BI</span><span class="e-tag">HR Analytics</span><span class="e-tag">P&L</span><span class="e-tag">~50% effort ↓</span></div>
+          <div class="exp-tags"><span class="etag">Qlik Sense Enterprise</span><span class="etag">Power BI</span><span class="etag">HR Analytics</span><span class="etag">P&L</span><span class="etag">~50% effort ↓</span></div>
         </div>
         <div class="exp-panel" id="ep3">
           <div class="exp-role">Software Engineer – BI Development</div>
           <div class="exp-co">Motherson Technology Services Ltd. (MTSL) · Noida · Jul 2019 – Aug 2021</div>
-          <ul class="exp-bullets">
+          <ul class="exp-ul">
             <li>Designed and delivered custom BI dashboards for AUDI Group's CDP solution, enabling real-time operational visibility for key stakeholders.</li>
-            <li>Built an Operational Analytics Solution in Qlik Sense for injection molding, inventory, and paintline — cutting manual data consolidation effort by ~60% through automated reporting.</li>
+            <li>Built Operational Analytics Solution in Qlik Sense for injection molding, inventory, and paintline — cutting manual data consolidation effort by ~60%.</li>
             <li>Automated financial and operational report distribution via Qlik NPrinting, eliminating ~10 hours/week of manual effort.</li>
           </ul>
-          <div class="exp-tags"><span class="e-tag">QlikSense</span><span class="e-tag">NPrinting</span><span class="e-tag">AUDI CDP</span><span class="e-tag">~60% effort ↓</span><span class="e-tag">~10 hrs/wk saved</span></div>
+          <div class="exp-tags"><span class="etag">QlikSense</span><span class="etag">NPrinting</span><span class="etag">AUDI CDP</span><span class="etag">~60% effort ↓</span><span class="etag">~10 hrs/wk saved</span></div>
         </div>
         <div class="exp-panel" id="ep4">
           <div class="exp-role">Engineer Trainee</div>
           <div class="exp-co">Motherson Technology Services Ltd. (MTSL) · Noida · Jul 2018 – Jul 2019</div>
-          <ul class="exp-bullets">
+          <ul class="exp-ul">
             <li>Developed P&amp;L and balance sheet dashboards for senior management across group companies, embedding financial KPIs for budget vs. actuals vs. forecast tracking.</li>
           </ul>
-          <div class="exp-tags"><span class="e-tag">P&L Reports</span><span class="e-tag">Balance Sheet</span><span class="e-tag">Financial KPIs</span><span class="e-tag">Qlik</span></div>
+          <div class="exp-tags"><span class="etag">P&L Reports</span><span class="etag">Balance Sheet</span><span class="etag">Financial KPIs</span><span class="etag">Qlik</span></div>
         </div>
       </div>
     </div>
@@ -505,477 +422,249 @@ footer{padding:28px 48px;border-top:1px solid var(--border);display:flex;justify
 <!-- WORK -->
 <section id="work" class="section">
   <div class="container">
-    <div class="s-tag">02 — Work</div>
-    <h2 class="s-title">18+ end-to-end<br><em>projects delivered</em></h2>
-    <p class="work-intro">Analytics platforms, dashboards, and BI systems — each built from scratch across diverse industries and tech stacks.</p>
+    <div class="section-eyebrow">03 Work</div>
+    <h2 class="section-title">18+ <em>PROJECTS</em></h2>
+    <p style="color:var(--muted);font-size:.88rem;margin-top:12px;max-width:540px;">End-to-end BI delivery across manufacturing, HR, finance, sales and cloud. Hover any card to see the data inside.</p>
     <div class="work-filters">
       <button class="wf active" onclick="filterWork('all',this)">All (18)</button>
-      <button class="wf" onclick="filterWork('hr',this)">HR Analytics</button>
+      <button class="wf" onclick="filterWork('hr',this)">HR</button>
       <button class="wf" onclick="filterWork('finance',this)">Finance</button>
-      <button class="wf" onclick="filterWork('manufacturing',this)">Manufacturing</button>
+      <button class="wf" onclick="filterWork('mfg',this)">Manufacturing</button>
       <button class="wf" onclick="filterWork('cloud',this)">Cloud / Infra</button>
       <button class="wf" onclick="filterWork('sales',this)">Sales / Procurement</button>
       <button class="wf" onclick="filterWork('ml',this)">ML / Advanced</button>
     </div>
     <div class="proj-grid" id="projGrid">
 
-<!-- helper macro: each card gets a .pc-dash (mini always visible) + .pc-popover (expanded on hover) -->
-
 <!-- HR 1 -->
-<div class="pc pc-blue" data-cat="hr">
-  <div class="pc-top"><div class="pc-icon">👥</div><div class="pc-label">HR Analytics</div><h3>MATE HR — Workforce Overview</h3><p>End-to-end HR platform covering active workforce, CTC, attrition, absenteeism, overtime, and TMS across 20+ group units.</p><div class="pc-techs"><span class="pct">Qliksense</span><span class="pct">HR BI</span><span class="pct">20+ Units</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#4f8ef7">Workforce · Unit View</div><div class="mini-bar-row"><span class="mbl" style="color:#4f8ef7">SMIEL</span><div class="mbt"><div class="mbf" style="width:100%;background:linear-gradient(90deg,#c0392b,#e07b39)"></div></div></div><div class="mini-bar-row"><span class="mbl" style="color:#4f8ef7">CH-III</span><div class="mbt"><div class="mbf" style="width:76%;background:#4f8ef7"></div></div></div></div>
-  <div class="pc-popover" style="border-color:rgba(79,142,247,0.3)">
-    <div class="pop-title" style="color:#4f8ef7">👥 MATE HR — Workforce Overview</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(79,142,247,0.08)"><div class="pop-kpi-val" style="color:#4f8ef7">14,097</div><div class="pop-kpi-label">Workforce</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,170,0.07)"><div class="pop-kpi-val" style="color:#00d4aa">₹417M</div><div class="pop-kpi-label">CTC/mo</div></div>
-      <div class="pop-kpi" style="background:rgba(245,200,66,0.07)"><div class="pop-kpi-val" style="color:#f5c842">28</div><div class="pop-kpi-label">Avg Age</div></div>
-    </div>
-    <div class="pop-bar-row"><span class="pop-bl">SMIEL</span><div class="pop-bt"><div class="pop-bf" style="width:100%;background:linear-gradient(90deg,#c0392b,#e07b39)"></div></div><span style="font-size:.65rem;color:#4f8ef7;margin-left:6px">1,940</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">CH-III</span><div class="pop-bt"><div class="pop-bf" style="width:76%;background:#4f8ef7"></div></div><span style="font-size:.65rem;color:#4f8ef7;margin-left:6px">1,480</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">SANAND</span><div class="pop-bt"><div class="pop-bf" style="width:68%;background:#4f8ef7;opacity:.8"></div></div><span style="font-size:.65rem;color:#4f8ef7;margin-left:6px">1,330</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">BGLR</span><div class="pop-bt"><div class="pop-bf" style="width:63%;background:#4f8ef7;opacity:.65"></div></div><span style="font-size:.65rem;color:#4f8ef7;margin-left:6px">1,226</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">PUNE</span><div class="pop-bt"><div class="pop-bf" style="width:43%;background:#4f8ef7;opacity:.5"></div></div><span style="font-size:.65rem;color:#4f8ef7;margin-left:6px">838</span></div>
-  </div>
-</div>
+<div class="pc th-blue" data-cat="hr"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">HR Analytics · Qliksense</div><h3>MATE HR — Workforce Overview</h3><p>End-to-end HR platform covering workforce, CTC, attrition, absenteeism, overtime &amp; TMS across 20+ group units.</p><div class="pc-tags"><span class="pct">Qliksense</span><span class="pct">HR BI</span><span class="pct">20+ Units</span></div><div class="pc-mini"><div class="mini-label">Workforce · Unit View</div><div class="mini-bar-row"><span class="mbl">SMIEL</span><div class="mbt"><div class="mbf" style="width:100%;background:linear-gradient(90deg,#c0392b,#e07b39)"></div></div></div><div class="mini-bar-row"><span class="mbl">CH-III</span><div class="mbt"><div class="mbf" style="width:76%"></div></div></div><div class="mini-bar-row"><span class="mbl">SANAND</span><div class="mbt"><div class="mbf" style="width:68%"></div></div></div></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#4f8ef7">👥 MATE HR Overview</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">14,097</div><div class="bkpi-label">Workforce</div></div><div class="bkpi"><div class="bkpi-val" style="color:#00d4aa">₹417M</div><div class="bkpi-label">CTC/mo</div></div><div class="bkpi"><div class="bkpi-val" style="color:#f5c842">28</div><div class="bkpi-label">Avg Age</div></div></div><div class="bbar-row"><span class="bbl">SMIEL</span><div class="bbt"><div class="bbf" style="width:100%;background:linear-gradient(90deg,#c0392b,#e07b39)"></div></div><span style="font-size:.6rem;color:#4f8ef7;margin-left:6px">1,940</span></div><div class="bbar-row"><span class="bbl">CH-III</span><div class="bbt"><div class="bbf" style="width:76%"></div></div><span style="font-size:.6rem;color:#4f8ef7;margin-left:6px">1,480</span></div><div class="bbar-row"><span class="bbl">SANAND</span><div class="bbt"><div class="bbf" style="width:68%"></div></div><span style="font-size:.6rem;color:#4f8ef7;margin-left:6px">1,330</span></div><div class="bbar-row"><span class="bbl">BGLR</span><div class="bbt"><div class="bbf" style="width:63%"></div></div><span style="font-size:.6rem;color:#4f8ef7;margin-left:6px">1,226</span></div></div>
+</div></div>
 
 <!-- HR 2 -->
-<div class="pc pc-blue" data-cat="hr">
-  <div class="pc-top"><div class="pc-icon">📉</div><div class="pc-label">HR Analytics</div><h3>Attrition & Retention Dashboard</h3><p>Predictive attrition analysis by unit, department, designation, and tenure bracket — with trend alerts and retention scoring.</p><div class="pc-techs"><span class="pct">Qliksense</span><span class="pct">Attrition ML</span><span class="pct">AutoML</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#4f8ef7">Attrition Trend</div><svg class="mini-line" viewBox="0 0 220 35"><defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4f8ef7" stop-opacity=".3"/><stop offset="100%" stop-color="#4f8ef7" stop-opacity="0"/></linearGradient></defs><path d="M0,25 L55,18 L110,15 L165,12 L220,10 L220,35 L0,35Z" fill="url(#ag)"/><polyline points="0,25 55,18 110,15 165,12 220,10" fill="none" stroke="#4f8ef7" stroke-width="1.5"/></svg></div>
-  <div class="pc-popover" style="border-color:rgba(79,142,247,0.3)">
-    <div class="pop-title" style="color:#4f8ef7">📉 Attrition & Retention Dashboard</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(79,142,247,0.08)"><div class="pop-kpi-val" style="color:#4f8ef7">3.2%</div><div class="pop-kpi-label">Attrition</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,170,0.07)"><div class="pop-kpi-val" style="color:#00d4aa">↓0.4%</div><div class="pop-kpi-label">vs Last Mo</div></div>
-      <div class="pop-kpi" style="background:rgba(231,76,60,0.07)"><div class="pop-kpi-val" style="color:#e74c3c">142</div><div class="pop-kpi-label">At-risk</div></div>
-    </div>
-    <svg class="pop-chart" viewBox="0 0 280 55"><defs><linearGradient id="ag2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4f8ef7" stop-opacity=".25"/><stop offset="100%" stop-color="#4f8ef7" stop-opacity="0"/></linearGradient></defs><path d="M0,38 L35,32 L70,26 L105,34 L140,20 L175,28 L210,16 L245,22 L280,12 L280,55 L0,55Z" fill="url(#ag2)"/><polyline points="0,38 35,32 70,26 105,34 140,20 175,28 210,16 245,22 280,12" fill="none" stroke="#4f8ef7" stroke-width="1.8"/><circle cx="210" cy="16" r="3.5" fill="#00d4aa"/><text x="194" y="12" font-size="9" fill="#00d4aa">Low</text></svg>
-  </div>
-</div>
+<div class="pc th-blue" data-cat="hr"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">HR Analytics · AutoML</div><h3>Attrition &amp; Retention Dashboard</h3><p>Predictive attrition analysis by unit, dept, designation, and tenure with trend alerts and retention scoring.</p><div class="pc-tags"><span class="pct">Qliksense</span><span class="pct">AutoML</span><span class="pct">Attrition</span></div><div class="pc-mini"><div class="mini-label">Attrition Trend</div><svg class="mini-line" viewBox="0 0 220 32"><defs><linearGradient id="a1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4f8ef7" stop-opacity=".3"/><stop offset="100%" stop-color="#4f8ef7" stop-opacity="0"/></linearGradient></defs><path d="M0,24 L55,17 L110,14 L165,11 L220,9 L220,32 L0,32Z" fill="url(#a1)"/><polyline points="0,24 55,17 110,14 165,11 220,9" fill="none" stroke="#4f8ef7" stroke-width="1.5"/></svg></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#4f8ef7">📉 Attrition Dashboard</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">3.2%</div><div class="bkpi-label">Attrition</div></div><div class="bkpi"><div class="bkpi-val" style="color:#00d4aa">↓0.4%</div><div class="bkpi-label">vs Last Mo</div></div><div class="bkpi"><div class="bkpi-val" style="color:#e74c3c">142</div><div class="bkpi-label">At-risk</div></div></div><svg class="back-chart" viewBox="0 0 280 56"><defs><linearGradient id="a2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4f8ef7" stop-opacity=".2"/><stop offset="100%" stop-color="#4f8ef7" stop-opacity="0"/></linearGradient></defs><path d="M0,40 L40,32 L80,26 L120,34 L160,20 L200,26 L240,14 L280,10 L280,56 L0,56Z" fill="url(#a2)"/><polyline points="0,40 40,32 80,26 120,34 160,20 200,26 240,14 280,10" fill="none" stroke="#4f8ef7" stroke-width="1.8"/><circle cx="240" cy="14" r="3.5" fill="#00d4aa"/></svg></div>
+</div></div>
 
 <!-- HR 3 -->
-<div class="pc pc-blue" data-cat="hr">
-  <div class="pc-top"><div class="pc-icon">⏰</div><div class="pc-label">HR Analytics</div><h3>Overtime & Absenteeism Tracker</h3><p>Consolidated late entry, overtime, and absenteeism tracking with unit and shift-level drill-through and automated alerts.</p><div class="pc-techs"><span class="pct">Qliksense</span><span class="pct">TMS</span><span class="pct">MEP</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#4f8ef7">Absenteeism %</div><div class="mini-bar-row"><span class="mbl" style="color:#4f8ef7">PUNE</span><div class="mbt"><div class="mbf" style="width:72%;background:#4f8ef7;opacity:.9"></div></div></div><div class="mini-bar-row"><span class="mbl" style="color:#4f8ef7">BGLR</span><div class="mbt"><div class="mbf" style="width:55%;background:#4f8ef7;opacity:.7"></div></div></div></div>
-  <div class="pc-popover" style="border-color:rgba(79,142,247,0.3)">
-    <div class="pop-title" style="color:#4f8ef7">⏰ Overtime & Absenteeism Tracker</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(79,142,247,0.08)"><div class="pop-kpi-val" style="color:#4f8ef7">4.1%</div><div class="pop-kpi-label">Avg Absent</div></div>
-      <div class="pop-kpi" style="background:rgba(245,120,20,0.07)"><div class="pop-kpi-val" style="color:#f57814">312h</div><div class="pop-kpi-label">OT This Mo</div></div>
-      <div class="pop-kpi" style="background:rgba(245,200,66,0.07)"><div class="pop-kpi-val" style="color:#f5c842">7</div><div class="pop-kpi-label">Units</div></div>
-    </div>
-    <div class="pop-bar-row"><span class="pop-bl">PUNE</span><div class="pop-bt"><div class="pop-bf" style="width:72%;background:#4f8ef7"></div></div><span style="font-size:.65rem;color:#4f8ef7;margin-left:6px">4.8%</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">BGLR</span><div class="pop-bt"><div class="pop-bf" style="width:55%;background:#4f8ef7;opacity:.8"></div></div><span style="font-size:.65rem;color:#4f8ef7;margin-left:6px">3.6%</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">TPKAR</span><div class="pop-bt"><div class="pop-bf" style="width:40%;background:#4f8ef7;opacity:.65"></div></div><span style="font-size:.65rem;color:#4f8ef7;margin-left:6px">2.7%</span></div>
-  </div>
-</div>
+<div class="pc th-blue" data-cat="hr"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">HR Analytics · TMS / MEP</div><h3>Overtime &amp; Absenteeism Tracker</h3><p>Consolidated late entry, overtime &amp; absenteeism tracking with shift-level drill-through and automated alerts.</p><div class="pc-tags"><span class="pct">Qliksense</span><span class="pct">TMS</span><span class="pct">MEP</span></div><div class="pc-mini"><div class="mini-label">Absenteeism %</div><div class="mini-bar-row"><span class="mbl">PUNE</span><div class="mbt"><div class="mbf" style="width:72%"></div></div></div><div class="mini-bar-row"><span class="mbl">BGLR</span><div class="mbt"><div class="mbf" style="width:55%"></div></div></div><div class="mini-bar-row"><span class="mbl">TPKAR</span><div class="mbt"><div class="mbf" style="width:40%"></div></div></div></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#4f8ef7">⏰ OT &amp; Absenteeism</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">4.1%</div><div class="bkpi-label">Avg Absent</div></div><div class="bkpi"><div class="bkpi-val" style="color:#f57814">312h</div><div class="bkpi-label">OT This Mo</div></div><div class="bkpi"><div class="bkpi-val" style="color:#f5c842">7</div><div class="bkpi-label">Units</div></div></div><div class="bbar-row"><span class="bbl">PUNE</span><div class="bbt"><div class="bbf" style="width:72%"></div></div><span style="font-size:.6rem;color:#4f8ef7;margin-left:6px">4.8%</span></div><div class="bbar-row"><span class="bbl">BGLR</span><div class="bbt"><div class="bbf" style="width:55%"></div></div><span style="font-size:.6rem;color:#4f8ef7;margin-left:6px">3.6%</span></div><div class="bbar-row"><span class="bbl">TPKAR</span><div class="bbt"><div class="bbf" style="width:40%"></div></div><span style="font-size:.6rem;color:#4f8ef7;margin-left:6px">2.7%</span></div></div>
+</div></div>
 
 <!-- Finance 1 -->
-<div class="pc pc-green" data-cat="finance">
-  <div class="pc-top"><div class="pc-icon">💰</div><div class="pc-label">Finance</div><h3>Group Management Summary</h3><p>Multi-company, multi-year P&L reporting with budget vs. actuals, YoY comparisons, Capex and Overhead tabs for group CFO.</p><div class="pc-techs"><span class="pct">Power BI</span><span class="pct">P&L</span><span class="pct">Multi-co</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#00d478">Revenue (INR M)</div><div class="mini-bar-row"><span class="mbl" style="color:#00d478">KIML</span><div class="mbt"><div class="mbf" style="width:100%;background:linear-gradient(90deg,#00d478,#00a050)"></div></div></div><div class="mini-bar-row"><span class="mbl" style="color:#00d478">HMM</span><div class="mbt"><div class="mbf" style="width:66%;background:#00d478;opacity:.8"></div></div></div></div>
-  <div class="pc-popover" style="border-color:rgba(0,212,120,0.3)">
-    <div class="pop-title" style="color:#00d478">💰 Group Management Summary</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.07)"><div class="pop-kpi-val" style="color:#00d478">↑12.4%</div><div class="pop-kpi-label">YoY Growth</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.05)"><div class="pop-kpi-val" style="color:#00d478">FY26</div><div class="pop-kpi-label">Period</div></div>
-      <div class="pop-kpi" style="background:rgba(245,200,66,0.07)"><div class="pop-kpi-val" style="color:#f5c842">INR</div><div class="pop-kpi-label">Currency</div></div>
-    </div>
-    <div class="pop-bar-row"><span class="pop-bl">KIML</span><div class="pop-bt"><div class="pop-bf" style="width:100%;background:linear-gradient(90deg,#00d478,#00a050)"></div></div><span style="font-size:.65rem;color:#00d478;margin-left:6px">22,383M</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">HMM</span><div class="pop-bt"><div class="pop-bf" style="width:66%;background:#00d478;opacity:.8"></div></div><span style="font-size:.65rem;color:#00d478;margin-left:6px">14,877M</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">CIM-Tools</span><div class="pop-bt"><div class="pop-bf" style="width:40%;background:#00d478;opacity:.65"></div></div><span style="font-size:.65rem;color:#00d478;margin-left:6px">8,841M</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">ESPIRIT</span><div class="pop-bt"><div class="pop-bf" style="width:46%;background:#00d478;opacity:.55"></div></div><span style="font-size:.65rem;color:#00d478;margin-left:6px">10,086M</span></div>
-  </div>
-</div>
+<div class="pc th-green" data-cat="finance"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">Finance · Power BI</div><h3>Group Management Summary</h3><p>Multi-company P&amp;L with budget vs. actuals, YoY comparisons, Capex and Overhead tabs for group CFO.</p><div class="pc-tags"><span class="pct">Power BI</span><span class="pct">P&L</span><span class="pct">Multi-co</span></div><div class="pc-mini"><div class="mini-label">Revenue (INR M)</div><div class="mini-bar-row"><span class="mbl">KIML</span><div class="mbt"><div class="mbf" style="width:100%;background:linear-gradient(90deg,#00d478,#00a050)"></div></div></div><div class="mini-bar-row"><span class="mbl">HMM</span><div class="mbt"><div class="mbf" style="width:66%"></div></div></div></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#00d478">💰 Group Management Summary</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">↑12.4%</div><div class="bkpi-label">YoY Growth</div></div><div class="bkpi"><div class="bkpi-val">FY26</div><div class="bkpi-label">Period</div></div><div class="bkpi"><div class="bkpi-val" style="color:#f5c842">INR</div><div class="bkpi-label">Currency</div></div></div><div class="bbar-row"><span class="bbl">KIML</span><div class="bbt"><div class="bbf" style="width:100%;background:linear-gradient(90deg,#00d478,#00a050)"></div></div><span style="font-size:.6rem;color:#00d478;margin-left:6px">22,383M</span></div><div class="bbar-row"><span class="bbl">HMM</span><div class="bbt"><div class="bbf" style="width:66%"></div></div><span style="font-size:.6rem;color:#00d478;margin-left:6px">14,877M</span></div><div class="bbar-row"><span class="bbl">CIM-Tools</span><div class="bbt"><div class="bbf" style="width:39%"></div></div><span style="font-size:.6rem;color:#00d478;margin-left:6px">8,841M</span></div></div>
+</div></div>
 
 <!-- Finance 2 -->
-<div class="pc pc-green" data-cat="finance">
-  <div class="pc-top"><div class="pc-icon">📊</div><div class="pc-label">Finance</div><h3>Motherson Spend Intelligence</h3><p>Global procurement spend analytics covering €20B+ across 35K+ suppliers — commodity, forex, sourcing, and overlap analysis.</p><div class="pc-techs"><span class="pct">Qliksense</span><span class="pct">Spend BI</span><span class="pct">€20B Scope</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#00d478">Spend Trend</div><svg class="mini-line" viewBox="0 0 220 35"><defs><linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00d478" stop-opacity=".3"/><stop offset="100%" stop-color="#00d478" stop-opacity="0"/></linearGradient></defs><path d="M0,28 L55,22 L110,16 L165,10 L220,18 L220,35 L0,35Z" fill="url(#gg)"/><polyline points="0,28 55,22 110,16 165,10 220,18" fill="none" stroke="#00d478" stroke-width="1.5"/></svg></div>
-  <div class="pc-popover" style="border-color:rgba(0,212,120,0.3)">
-    <div class="pop-title" style="color:#00d478">📊 Spend Intelligence</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.07)"><div class="pop-kpi-val" style="color:#00d478">€20.2B</div><div class="pop-kpi-label">Total Spend</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.05)"><div class="pop-kpi-val" style="color:#00d478">35,766</div><div class="pop-kpi-label">Suppliers</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.05)"><div class="pop-kpi-val" style="color:#00d478">8.0%</div><div class="pop-kpi-label">Interco</div></div>
-    </div>
-    <svg class="pop-chart" viewBox="0 0 280 55"><defs><linearGradient id="gg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00d478" stop-opacity=".2"/><stop offset="100%" stop-color="#00d478" stop-opacity="0"/></linearGradient></defs><path d="M0,46 L35,42 L70,44 L105,36 L140,32 L175,24 L210,16 L245,10 L280,22 L280,55 L0,55Z" fill="url(#gg2)"/><polyline points="0,46 35,42 70,44 105,36 140,32 175,24 210,16 245,10 280,22" fill="none" stroke="#00d478" stroke-width="1.8"/><polyline points="0,50 35,46 70,48 105,42 140,38 175,32 210,26 245,22 280,30" fill="none" stroke="#00a050" stroke-width="1.2" stroke-dasharray="4,3" opacity=".6"/></svg>
-  </div>
-</div>
+<div class="pc th-green" data-cat="finance"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">Finance · Qliksense</div><h3>Motherson Spend Intelligence</h3><p>Global procurement spend analytics covering €20B+ across 35K+ suppliers — commodity, forex, sourcing analysis.</p><div class="pc-tags"><span class="pct">Qliksense</span><span class="pct">Spend BI</span><span class="pct">€20B</span></div><div class="pc-mini"><div class="mini-label">Spend Trend</div><svg class="mini-line" viewBox="0 0 220 32"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00d478" stop-opacity=".3"/><stop offset="100%" stop-color="#00d478" stop-opacity="0"/></linearGradient></defs><path d="M0,26 L55,20 L110,15 L165,9 L220,16 L220,32 L0,32Z" fill="url(#g1)"/><polyline points="0,26 55,20 110,15 165,9 220,16" fill="none" stroke="#00d478" stroke-width="1.5"/></svg></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#00d478">📊 Spend Intelligence</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">€20.2B</div><div class="bkpi-label">Total</div></div><div class="bkpi"><div class="bkpi-val">35,766</div><div class="bkpi-label">Suppliers</div></div><div class="bkpi"><div class="bkpi-val">8.0%</div><div class="bkpi-label">Interco</div></div></div><svg class="back-chart" viewBox="0 0 280 56"><defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00d478" stop-opacity=".2"/><stop offset="100%" stop-color="#00d478" stop-opacity="0"/></linearGradient></defs><path d="M0,50 L40,44 L80,48 L120,38 L160,32 L200,22 L240,13 L280,24 L280,56 L0,56Z" fill="url(#g2)"/><polyline points="0,50 40,44 80,48 120,38 160,32 200,22 240,13 280,24" fill="none" stroke="#00d478" stroke-width="1.8"/></svg></div>
+</div></div>
 
 <!-- Finance 3 -->
-<div class="pc pc-green" data-cat="finance">
-  <div class="pc-top"><div class="pc-icon">📈</div><div class="pc-label">Finance</div><h3>Finance KPI & Monthly Reporting</h3><p>Automated monthly P&L, balance sheet, and management KPI reports for senior leadership integrated with group ERP data.</p><div class="pc-techs"><span class="pct">Power BI</span><span class="pct">Qlik NPrinting</span><span class="pct">ERP</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#00d478">Budget vs Actual</div><div class="mini-bar-row"><span class="mbl" style="color:#00d478">Revenue</span><div class="mbt"><div class="mbf" style="width:88%;background:#00d478;opacity:.9"></div></div></div><div class="mini-bar-row"><span class="mbl" style="color:#00d478">EBITDA</span><div class="mbt"><div class="mbf" style="width:92%;background:#00d478;opacity:.75"></div></div></div></div>
-  <div class="pc-popover" style="border-color:rgba(0,212,120,0.3)">
-    <div class="pop-title" style="color:#00d478">📈 Finance KPI Reporting</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.07)"><div class="pop-kpi-val" style="color:#00d478">Monthly</div><div class="pop-kpi-label">Cadence</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.05)"><div class="pop-kpi-val" style="color:#00d478">Auto</div><div class="pop-kpi-label">NPrinting</div></div>
-      <div class="pop-kpi" style="background:rgba(245,200,66,0.07)"><div class="pop-kpi-val" style="color:#f5c842">ERP</div><div class="pop-kpi-label">Data Src</div></div>
-    </div>
-    <div class="pop-bar-row"><span class="pop-bl">Revenue</span><div class="pop-bt"><div class="pop-bf" style="width:88%;background:#00d478"></div></div><span style="font-size:.65rem;color:#00d478;margin-left:6px">88%</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">EBITDA</span><div class="pop-bt"><div class="pop-bf" style="width:92%;background:#00d478;opacity:.8"></div></div><span style="font-size:.65rem;color:#00d478;margin-left:6px">92%</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">Capex</span><div class="pop-bt"><div class="pop-bf" style="width:67%;background:#f5c842"></div></div><span style="font-size:.65rem;color:#f5c842;margin-left:6px">67%</span></div>
-  </div>
-</div>
+<div class="pc th-green" data-cat="finance"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">Finance · NPrinting / ERP</div><h3>Finance KPI &amp; Monthly Reporting</h3><p>Automated monthly P&amp;L, balance sheet, and management KPI reports for senior leadership integrated with ERP.</p><div class="pc-tags"><span class="pct">Power BI</span><span class="pct">NPrinting</span><span class="pct">ERP</span></div><div class="pc-mini"><div class="mini-label">Budget vs Actual</div><div class="mini-bar-row"><span class="mbl">Revenue</span><div class="mbt"><div class="mbf" style="width:88%"></div></div></div><div class="mini-bar-row"><span class="mbl">EBITDA</span><div class="mbt"><div class="mbf" style="width:92%"></div></div></div><div class="mini-bar-row"><span class="mbl">Capex</span><div class="mbt"><div class="mbf" style="width:67%;background:#f5c842"></div></div></div></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#00d478">📈 KPI Monthly Reports</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">Monthly</div><div class="bkpi-label">Cadence</div></div><div class="bkpi"><div class="bkpi-val">Auto</div><div class="bkpi-label">NPrinting</div></div><div class="bkpi"><div class="bkpi-val" style="color:#f5c842">~50%</div><div class="bkpi-label">Effort ↓</div></div></div><div class="bbar-row"><span class="bbl">Revenue</span><div class="bbt"><div class="bbf" style="width:88%"></div></div><span style="font-size:.6rem;color:#00d478;margin-left:6px">88%</span></div><div class="bbar-row"><span class="bbl">EBITDA</span><div class="bbt"><div class="bbf" style="width:92%"></div></div><span style="font-size:.6rem;color:#00d478;margin-left:6px">92%</span></div><div class="bbar-row"><span class="bbl">Capex</span><div class="bbt"><div class="bbf" style="width:67%;background:#f5c842"></div></div><span style="font-size:.6rem;color:#f5c842;margin-left:6px">67%</span></div></div>
+</div></div>
 
 <!-- Mfg 1 -->
-<div class="pc pc-orange" data-cat="manufacturing">
-  <div class="pc-top"><div class="pc-icon">🏭</div><div class="pc-label">Manufacturing</div><h3>SMP Paintline Active Dashboard</h3><p>Real-time paintline monitoring — Good%, Scrap%, OEE, Skid availability, part-wise quality and daily shift reports.</p><div class="pc-techs"><span class="pct">Qliksense</span><span class="pct">OEE</span><span class="pct">Production BI</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#f57814">Production</div><svg class="mini-line" viewBox="0 0 220 35"><polyline points="0,10 55,18 110,10 165,7 220,20" fill="none" stroke="#f57814" stroke-width="1.5"/><polyline points="0,28 55,22 110,27 165,26 220,18" fill="none" stroke="#00d478" stroke-width="1.2" stroke-dasharray="3,2"/></svg></div>
-  <div class="pc-popover" style="border-color:rgba(245,120,20,0.3)">
-    <div class="pop-title" style="color:#f57814">🏭 SMP Paintline Dashboard</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(245,120,20,0.08)"><div class="pop-kpi-val" style="color:#f57814">101K</div><div class="pop-kpi-label">Output</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.07)"><div class="pop-kpi-val" style="color:#00d478">89.5%</div><div class="pop-kpi-label">Good</div></div>
-      <div class="pop-kpi" style="background:rgba(231,76,60,0.07)"><div class="pop-kpi-val" style="color:#e74c3c">7.8%</div><div class="pop-kpi-label">Scrap</div></div>
-    </div>
-    <svg class="pop-chart" viewBox="0 0 280 55"><polyline points="0,18 35,22 70,42 105,44 140,16 175,12 210,10 245,32 280,40" fill="none" stroke="#f57814" stroke-width="1.8"/><polyline points="0,42 35,38 70,32 105,38 140,40 175,42 210,38 245,40 280,28" fill="none" stroke="#00d478" stroke-width="1.3" stroke-dasharray="4,3"/><text x="3" y="52" font-size="8" fill="#5a3010">12M</text><text x="130" y="52" font-size="8" fill="#5a3010">16M</text><text x="260" y="52" font-size="8" fill="#5a3010">20M</text></svg>
-  </div>
-</div>
+<div class="pc th-orange" data-cat="mfg"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">Manufacturing · OEE</div><h3>SMP Paintline Active Dashboard</h3><p>Real-time paintline monitoring — Good%, Scrap%, OEE, Skid availability, part-wise quality and shift reports.</p><div class="pc-tags"><span class="pct">Qliksense</span><span class="pct">OEE</span><span class="pct">Production BI</span></div><div class="pc-mini"><div class="mini-label">Production Stats</div><svg class="mini-line" viewBox="0 0 220 32"><polyline points="0,9 55,16 110,9 165,6 220,18" fill="none" stroke="#f57814" stroke-width="1.5"/><polyline points="0,26 55,20 110,25 165,24 220,16" fill="none" stroke="#00d478" stroke-width="1.2" stroke-dasharray="3,2"/></svg></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#f57814">🏭 SMP Paintline</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">101K</div><div class="bkpi-label">Output</div></div><div class="bkpi"><div class="bkpi-val" style="color:#00d478">89.5%</div><div class="bkpi-label">Good</div></div><div class="bkpi"><div class="bkpi-val" style="color:#e74c3c">7.8%</div><div class="bkpi-label">Scrap</div></div></div><svg class="back-chart" viewBox="0 0 280 56"><polyline points="0,18 40,24 80,46 120,48 160,18 200,12 240,10 280,26" fill="none" stroke="#f57814" stroke-width="1.8"/><polyline points="0,46 40,42 80,36 120,42 160,44 200,46 240,42 280,34" fill="none" stroke="#00d478" stroke-width="1.3" stroke-dasharray="4,3"/></svg></div>
+</div></div>
 
 <!-- Mfg 2 -->
-<div class="pc pc-orange" data-cat="manufacturing">
-  <div class="pc-top"><div class="pc-icon">⚙️</div><div class="pc-label">Manufacturing</div><h3>Injection Molding & Inventory OA</h3><p>Operational analytics for injection molding, inventory flow, and paintline with downtime tracking and automated daily mailers.</p><div class="pc-techs"><span class="pct">QlikSense</span><span class="pct">NPrinting</span><span class="pct">OA</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#f57814">Utilisation %</div><div class="mini-bar-row"><span class="mbl" style="color:#f57814">Line A</span><div class="mbt"><div class="mbf" style="width:91%;background:linear-gradient(90deg,#f57814,#f5c842)"></div></div></div><div class="mini-bar-row"><span class="mbl" style="color:#f57814">Line B</span><div class="mbt"><div class="mbf" style="width:78%;background:#f57814;opacity:.8"></div></div></div></div>
-  <div class="pc-popover" style="border-color:rgba(245,120,20,0.3)">
-    <div class="pop-title" style="color:#f57814">⚙️ Injection Molding & Inventory</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(245,120,20,0.08)"><div class="pop-kpi-val" style="color:#f57814">91%</div><div class="pop-kpi-label">Util. Line A</div></div>
-      <div class="pop-kpi" style="background:rgba(245,200,66,0.07)"><div class="pop-kpi-val" style="color:#f5c842">1.2h</div><div class="pop-kpi-label">Avg DT</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.07)"><div class="pop-kpi-val" style="color:#00d478">Auto</div><div class="pop-kpi-label">Reports</div></div>
-    </div>
-    <div class="pop-bar-row"><span class="pop-bl">Line A</span><div class="pop-bt"><div class="pop-bf" style="width:91%;background:linear-gradient(90deg,#f57814,#f5c842)"></div></div><span style="font-size:.65rem;color:#f57814;margin-left:6px">91%</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">Line B</span><div class="pop-bt"><div class="pop-bf" style="width:78%;background:#f57814;opacity:.8"></div></div><span style="font-size:.65rem;color:#f57814;margin-left:6px">78%</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">Line C</span><div class="pop-bt"><div class="pop-bf" style="width:64%;background:#f57814;opacity:.6"></div></div><span style="font-size:.65rem;color:#f57814;margin-left:6px">64%</span></div>
-  </div>
-</div>
+<div class="pc th-orange" data-cat="mfg"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">Manufacturing · NPrinting</div><h3>Injection Molding &amp; Inventory OA</h3><p>Operational analytics for injection molding, inventory flow and paintline with downtime tracking — ~60% effort cut.</p><div class="pc-tags"><span class="pct">QlikSense</span><span class="pct">NPrinting</span><span class="pct">OA</span></div><div class="pc-mini"><div class="mini-label">Machine Utilisation</div><div class="mini-bar-row"><span class="mbl">Line A</span><div class="mbt"><div class="mbf" style="width:91%;background:linear-gradient(90deg,#f57814,#f5c842)"></div></div></div><div class="mini-bar-row"><span class="mbl">Line B</span><div class="mbt"><div class="mbf" style="width:78%"></div></div></div><div class="mini-bar-row"><span class="mbl">Line C</span><div class="mbt"><div class="mbf" style="width:64%"></div></div></div></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#f57814">⚙️ Injection Molding</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">91%</div><div class="bkpi-label">Util. Line A</div></div><div class="bkpi"><div class="bkpi-val" style="color:#f5c842">1.2h</div><div class="bkpi-label">Avg DT</div></div><div class="bkpi"><div class="bkpi-val" style="color:#00d478">~60%</div><div class="bkpi-label">Effort ↓</div></div></div><div class="bbar-row"><span class="bbl">Line A</span><div class="bbt"><div class="bbf" style="width:91%;background:linear-gradient(90deg,#f57814,#f5c842)"></div></div><span style="font-size:.6rem;color:#f57814;margin-left:6px">91%</span></div><div class="bbar-row"><span class="bbl">Line B</span><div class="bbt"><div class="bbf" style="width:78%"></div></div><span style="font-size:.6rem;color:#f57814;margin-left:6px">78%</span></div><div class="bbar-row"><span class="bbl">Line C</span><div class="bbt"><div class="bbf" style="width:64%"></div></div><span style="font-size:.6rem;color:#f57814;margin-left:6px">64%</span></div></div>
+</div></div>
 
 <!-- Mfg 3 -->
-<div class="pc pc-orange" data-cat="manufacturing">
-  <div class="pc-top"><div class="pc-icon">🚗</div><div class="pc-label">Manufacturing</div><h3>AUDI Group CDP BI Dashboards</h3><p>Custom BI dashboards for AUDI Group's Customer Data Platform — production, supply chain, and quality KPIs.</p><div class="pc-techs"><span class="pct">QlikSense</span><span class="pct">AUDI CDP</span><span class="pct">Automotive</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#f57814">CDP KPIs</div><div class="mini-kpis"><div class="mk" style="background:rgba(245,120,20,0.08)"><div class="mk-val" style="color:#f57814">98.2%</div><div class="mk-label">Quality</div></div><div class="mk" style="background:rgba(0,212,120,0.07)"><div class="mk-val" style="color:#00d478">↑3.4%</div><div class="mk-label">Efficiency</div></div><div class="mk" style="background:rgba(245,200,66,0.07)"><div class="mk-val" style="color:#f5c842">5</div><div class="mk-label">Lines</div></div></div></div>
-  <div class="pc-popover" style="border-color:rgba(245,120,20,0.3)">
-    <div class="pop-title" style="color:#f57814">🚗 AUDI Group CDP Dashboards</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(245,120,20,0.08)"><div class="pop-kpi-val" style="color:#f57814">98.2%</div><div class="pop-kpi-label">Quality</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.07)"><div class="pop-kpi-val" style="color:#00d478">↑3.4%</div><div class="pop-kpi-label">Efficiency</div></div>
-      <div class="pop-kpi" style="background:rgba(245,200,66,0.07)"><div class="pop-kpi-val" style="color:#f5c842">5</div><div class="pop-kpi-label">Lines</div></div>
-    </div>
-    <div class="pop-bar-row"><span class="pop-bl">Quality</span><div class="pop-bt"><div class="pop-bf" style="width:98%;background:linear-gradient(90deg,#00d478,#00a050)"></div></div><span style="font-size:.65rem;color:#00d478;margin-left:6px">98.2%</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">Delivery</span><div class="pop-bt"><div class="pop-bf" style="width:94%;background:#f57814;opacity:.9"></div></div><span style="font-size:.65rem;color:#f57814;margin-left:6px">94.1%</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">OEE</span><div class="pop-bt"><div class="pop-bf" style="width:82%;background:#f5c842;opacity:.8"></div></div><span style="font-size:.65rem;color:#f5c842;margin-left:6px">82.0%</span></div>
-  </div>
-</div>
+<div class="pc th-orange" data-cat="mfg"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">Manufacturing · Automotive</div><h3>AUDI Group CDP BI Dashboards</h3><p>Custom BI for AUDI Group's Customer Data Platform — production, supply chain, and quality KPIs in real time.</p><div class="pc-tags"><span class="pct">QlikSense</span><span class="pct">AUDI CDP</span><span class="pct">Automotive</span></div><div class="pc-mini"><div class="mini-kpis"><div class="mk"><div class="mk-val">98.2%</div><div class="mk-label">Quality</div></div><div class="mk"><div class="mk-val">↑3.4%</div><div class="mk-label">Efficiency</div></div><div class="mk"><div class="mk-val" style="color:#f5c842">5</div><div class="mk-label">Lines</div></div></div></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#f57814">🚗 AUDI CDP</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">98.2%</div><div class="bkpi-label">Quality</div></div><div class="bkpi"><div class="bkpi-val">↑3.4%</div><div class="bkpi-label">Efficiency</div></div><div class="bkpi"><div class="bkpi-val" style="color:#f5c842">5</div><div class="bkpi-label">Lines</div></div></div><div class="bbar-row"><span class="bbl">Quality</span><div class="bbt"><div class="bbf" style="width:98%;background:#00d478"></div></div><span style="font-size:.6rem;color:#00d478;margin-left:6px">98.2%</span></div><div class="bbar-row"><span class="bbl">Delivery</span><div class="bbt"><div class="bbf" style="width:94%"></div></div><span style="font-size:.6rem;color:#f57814;margin-left:6px">94.1%</span></div><div class="bbar-row"><span class="bbl">OEE</span><div class="bbt"><div class="bbf" style="width:82%;background:#f5c842"></div></div><span style="font-size:.6rem;color:#f5c842;margin-left:6px">82.0%</span></div></div>
+</div></div>
 
 <!-- Cloud 1 -->
-<div class="pc pc-pink" data-cat="cloud">
-  <div class="pc-top"><div class="pc-icon">☁️</div><div class="pc-label">Cloud / Infra</div><h3>MS Fabric Migration POC</h3><p>End-to-end POC migrating legacy BI to MS Fabric — pipelines, PySpark dataflows, query conversion, OneLake lake-house integration.</p><div class="pc-techs"><span class="pct">MS Fabric</span><span class="pct">PySpark</span><span class="pct">OneLake</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#f759ab">Migration</div><div class="mini-bar-row"><span class="mbl" style="color:#f759ab">Pipelines</span><div class="mbt"><div class="mbf" style="width:100%;background:linear-gradient(90deg,#f759ab,#9b59f7)"></div></div></div><div class="mini-bar-row"><span class="mbl" style="color:#f759ab">PySpark</span><div class="mbt"><div class="mbf" style="width:70%;background:#f759ab;opacity:.7"></div></div></div></div>
-  <div class="pc-popover" style="border-color:rgba(247,89,171,0.3)">
-    <div class="pop-title" style="color:#f759ab">☁️ MS Fabric Migration POC</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(247,89,171,0.07)"><div class="pop-kpi-val" style="color:#f759ab">POC</div><div class="pop-kpi-label">Stage</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.07)"><div class="pop-kpi-val" style="color:#00d478">85%</div><div class="pop-kpi-label">Complete</div></div>
-      <div class="pop-kpi" style="background:rgba(155,89,247,0.07)"><div class="pop-kpi-val" style="color:#9b59f7">Azure</div><div class="pop-kpi-label">Platform</div></div>
-    </div>
-    <div class="pop-bar-row"><span class="pop-bl">Pipelines</span><div class="pop-bt"><div class="pop-bf" style="width:100%;background:linear-gradient(90deg,#f759ab,#9b59f7)"></div></div><span style="font-size:.65rem;color:#f759ab;margin-left:6px">Done</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">Dataflows</span><div class="pop-bt"><div class="pop-bf" style="width:85%;background:#f759ab;opacity:.8"></div></div><span style="font-size:.65rem;color:#f759ab;margin-left:6px">85%</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">PySpark</span><div class="pop-bt"><div class="pop-bf" style="width:70%;background:#9b59f7;opacity:.8"></div></div><span style="font-size:.65rem;color:#9b59f7;margin-left:6px">70%</span></div>
-  </div>
-</div>
+<div class="pc th-pink" data-cat="cloud"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">Cloud / Infra · MS Fabric</div><h3>MS Fabric Migration POC</h3><p>End-to-end POC migrating legacy BI to MS Fabric — pipelines, PySpark, query conversion, OneLake lake-house integration.</p><div class="pc-tags"><span class="pct">MS Fabric</span><span class="pct">PySpark</span><span class="pct">OneLake</span></div><div class="pc-mini"><div class="mini-label">Migration Progress</div><div class="mini-bar-row"><span class="mbl">Pipelines</span><div class="mbt"><div class="mbf" style="width:100%"></div></div></div><div class="mini-bar-row"><span class="mbl">Dataflows</span><div class="mbt"><div class="mbf" style="width:85%"></div></div></div><div class="mini-bar-row"><span class="mbl">PySpark</span><div class="mbt"><div class="mbf" style="width:70%;background:#9b59f7"></div></div></div></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#f759ab">☁️ MS Fabric Migration</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">POC</div><div class="bkpi-label">Stage</div></div><div class="bkpi"><div class="bkpi-val" style="color:#00d478">85%</div><div class="bkpi-label">Complete</div></div><div class="bkpi"><div class="bkpi-val" style="color:#f5c842">~25%</div><div class="bkpi-label">Infra ↓</div></div></div><div class="bbar-row"><span class="bbl">Pipelines</span><div class="bbt"><div class="bbf" style="width:100%"></div></div><span style="font-size:.6rem;color:#f759ab;margin-left:6px">Done</span></div><div class="bbar-row"><span class="bbl">Dataflows</span><div class="bbt"><div class="bbf" style="width:85%"></div></div><span style="font-size:.6rem;color:#f759ab;margin-left:6px">85%</span></div><div class="bbar-row"><span class="bbl">PySpark</span><div class="bbt"><div class="bbf" style="width:70%;background:#9b59f7"></div></div><span style="font-size:.6rem;color:#9b59f7;margin-left:6px">70%</span></div></div>
+</div></div>
 
 <!-- Cloud 2 -->
-<div class="pc pc-pink" data-cat="cloud">
-  <div class="pc-top"><div class="pc-icon">🖥️</div><div class="pc-label">Cloud / Infra</div><h3>Qlik on AWS EC2 Multi-Region</h3><p>Qliksense on AWS EC2 across multiple regions with S3 as data source, fully automated via AWS + Qlik CLI toolchains.</p><div class="pc-techs"><span class="pct">AWS EC2</span><span class="pct">S3</span><span class="pct">Qlik CLI</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#f759ab">Infrastructure</div><div class="mini-kpis"><div class="mk" style="background:rgba(247,89,171,0.07)"><div class="mk-val" style="color:#f759ab">3</div><div class="mk-label">Regions</div></div><div class="mk" style="background:rgba(247,89,171,0.05)"><div class="mk-val" style="color:#f759ab">99.9%</div><div class="mk-label">Uptime</div></div><div class="mk" style="background:rgba(247,89,171,0.05)"><div class="mk-val" style="color:#f759ab">Auto</div><div class="mk-label">CLI</div></div></div></div>
-  <div class="pc-popover" style="border-color:rgba(247,89,171,0.3)">
-    <div class="pop-title" style="color:#f759ab">🖥️ Qlik on AWS EC2</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(247,89,171,0.07)"><div class="pop-kpi-val" style="color:#f759ab">3</div><div class="pop-kpi-label">Regions</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.07)"><div class="pop-kpi-val" style="color:#00d478">99.9%</div><div class="pop-kpi-label">Uptime</div></div>
-      <div class="pop-kpi" style="background:rgba(245,200,66,0.07)"><div class="pop-kpi-val" style="color:#f5c842">Full</div><div class="pop-kpi-label">Automation</div></div>
-    </div>
-    <svg class="pop-chart" viewBox="0 0 280 55"><rect x="0" y="0" width="280" height="55" rx="6" fill="rgba(247,89,171,0.04)"/><text x="14" y="18" font-size="9" fill="#f759ab">US-EAST</text><text x="14" y="30" font-size="9" fill="#f759ab">EU-WEST</text><text x="14" y="42" font-size="9" fill="#f759ab">AP-SOUTH</text><rect x="90" y="10" width="170" height="10" rx="3" fill="rgba(247,89,171,0.15)"/><rect x="90" y="10" width="168" height="10" rx="3" fill="#f759ab" opacity=".8"/><rect x="90" y="22" width="170" height="10" rx="3" fill="rgba(247,89,171,0.1)"/><rect x="90" y="22" width="155" height="10" rx="3" fill="#f759ab" opacity=".6"/><rect x="90" y="34" width="170" height="10" rx="3" fill="rgba(247,89,171,0.1)"/><rect x="90" y="34" width="162" height="10" rx="3" fill="#9b59f7" opacity=".7"/></svg>
-  </div>
-</div>
+<div class="pc th-pink" data-cat="cloud"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">Cloud / Infra · AWS</div><h3>Qlik on AWS EC2 Multi-Region</h3><p>Qliksense on AWS EC2 across 3 regions with S3 data source. Automated via AWS + Qlik CLI — saves ~15 hrs/week.</p><div class="pc-tags"><span class="pct">AWS EC2</span><span class="pct">S3</span><span class="pct">Qlik CLI</span></div><div class="pc-mini"><div class="mini-kpis"><div class="mk"><div class="mk-val">3</div><div class="mk-label">Regions</div></div><div class="mk"><div class="mk-val">99.9%</div><div class="mk-label">Uptime</div></div><div class="mk"><div class="mk-val" style="color:#00d4aa">~15h</div><div class="mk-label">Saved/wk</div></div></div></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#f759ab">🖥️ Qlik on AWS EC2</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">3</div><div class="bkpi-label">Regions</div></div><div class="bkpi"><div class="bkpi-val" style="color:#00d478">99.9%</div><div class="bkpi-label">Uptime</div></div><div class="bkpi"><div class="bkpi-val" style="color:#f5c842">Full</div><div class="bkpi-label">Automation</div></div></div><div class="bbar-row"><span class="bbl">US-EAST</span><div class="bbt"><div class="bbf" style="width:99%"></div></div><span style="font-size:.6rem;color:#f759ab;margin-left:6px">Active</span></div><div class="bbar-row"><span class="bbl">EU-WEST</span><div class="bbt"><div class="bbf" style="width:92%"></div></div><span style="font-size:.6rem;color:#f759ab;margin-left:6px">Active</span></div><div class="bbar-row"><span class="bbl">AP-SOUTH</span><div class="bbt"><div class="bbf" style="width:94%;background:#9b59f7"></div></div><span style="font-size:.6rem;color:#9b59f7;margin-left:6px">Active</span></div></div>
+</div></div>
 
 <!-- Cloud 3 -->
-<div class="pc pc-gold" data-cat="cloud">
-  <div class="pc-top"><div class="pc-icon">🔧</div><div class="pc-label">Cloud / Infra</div><h3>Qliksense SaaS Migration</h3><p>Full migration of on-prem Qlik apps to SaaS — alerting, automation, autoML features and licence optimisation.</p><div class="pc-techs"><span class="pct">Qliksense SaaS</span><span class="pct">AutoML</span><span class="pct">Automation</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#f5c842">Apps Migrated</div><svg class="mini-line" viewBox="0 0 220 35"><defs><linearGradient id="glg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5c842" stop-opacity=".3"/><stop offset="100%" stop-color="#f5c842" stop-opacity="0"/></linearGradient></defs><path d="M0,32 L110,20 L220,6 L220,35 L0,35Z" fill="url(#glg)"/><polyline points="0,32 110,20 220,6" fill="none" stroke="#f5c842" stroke-width="1.5"/></svg></div>
-  <div class="pc-popover" style="border-color:rgba(245,200,66,0.3)">
-    <div class="pop-title" style="color:#f5c842">🔧 Qliksense SaaS Migration</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(245,200,66,0.07)"><div class="pop-kpi-val" style="color:#f5c842">40+</div><div class="pop-kpi-label">Apps</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.07)"><div class="pop-kpi-val" style="color:#00d478">100%</div><div class="pop-kpi-label">Success</div></div>
-      <div class="pop-kpi" style="background:rgba(79,142,247,0.07)"><div class="pop-kpi-val" style="color:#4f8ef7">AutoML</div><div class="pop-kpi-label">Enabled</div></div>
-    </div>
-    <svg class="pop-chart" viewBox="0 0 280 55"><defs><linearGradient id="glg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5c842" stop-opacity=".2"/><stop offset="100%" stop-color="#f5c842" stop-opacity="0"/></linearGradient></defs><path d="M0,50 L70,40 L140,28 L210,16 L280,8 L280,55 L0,55Z" fill="url(#glg2)"/><polyline points="0,50 70,40 140,28 210,16 280,8" fill="none" stroke="#f5c842" stroke-width="1.8"/><circle cx="280" cy="8" r="4" fill="#f5c842"/><text x="240" y="6" font-size="9" fill="#f5c842">40+ ✓</text></svg>
-  </div>
-</div>
+<div class="pc th-gold" data-cat="cloud"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">Cloud / Infra · SaaS</div><h3>Qliksense SaaS Migration</h3><p>Full migration of 40+ on-prem Qlik apps to SaaS — alerting, automation, AutoML features and licence optimisation.</p><div class="pc-tags"><span class="pct">Qliksense SaaS</span><span class="pct">AutoML</span><span class="pct">Automation</span></div><div class="pc-mini"><div class="mini-label">Apps Migrated</div><svg class="mini-line" viewBox="0 0 220 32"><defs><linearGradient id="gl1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5c842" stop-opacity=".3"/><stop offset="100%" stop-color="#f5c842" stop-opacity="0"/></linearGradient></defs><path d="M0,30 L110,18 L220,5 L220,32 L0,32Z" fill="url(#gl1)"/><polyline points="0,30 110,18 220,5" fill="none" stroke="#f5c842" stroke-width="1.5"/></svg></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#f5c842">🔧 SaaS Migration</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">40+</div><div class="bkpi-label">Apps</div></div><div class="bkpi"><div class="bkpi-val" style="color:#00d478">100%</div><div class="bkpi-label">Success</div></div><div class="bkpi"><div class="bkpi-val" style="color:#4f8ef7">AutoML</div><div class="bkpi-label">Enabled</div></div></div><svg class="back-chart" viewBox="0 0 280 56"><defs><linearGradient id="gl2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5c842" stop-opacity=".2"/><stop offset="100%" stop-color="#f5c842" stop-opacity="0"/></linearGradient></defs><path d="M0,54 L70,44 L140,30 L210,16 L280,7 L280,56 L0,56Z" fill="url(#gl2)"/><polyline points="0,54 70,44 140,30 210,16 280,7" fill="none" stroke="#f5c842" stroke-width="1.8"/><circle cx="280" cy="7" r="4" fill="#f5c842"/></svg></div>
+</div></div>
 
 <!-- Sales 1 -->
-<div class="pc pc-purple" data-cat="sales">
-  <div class="pc-top"><div class="pc-icon">📈</div><div class="pc-label">Sales Analytics</div><h3>iKnow — Sales Intelligence Platform</h3><p>Global sales analytics for €105B+ YTM revenue across 87 companies, 30 countries — customer intel, PV forecast, 3CX, and ad-hoc.</p><div class="pc-techs"><span class="pct">Qliksense</span><span class="pct">Sales BI</span><span class="pct">30 Countries</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#9b59f7">Customer Revenue</div><div class="mini-bar-row"><span class="mbl" style="color:#9b59f7">Inter Cos.</span><div class="mbt"><div class="mbf" style="width:100%;background:linear-gradient(90deg,#9b59f7,#f759ab)"></div></div></div><div class="mini-bar-row"><span class="mbl" style="color:#9b59f7">Suzuki</span><div class="mbt"><div class="mbf" style="width:72%;background:#9b59f7;opacity:.8"></div></div></div></div>
-  <div class="pc-popover" style="border-color:rgba(155,89,247,0.3)">
-    <div class="pop-title" style="color:#9b59f7">📈 iKnow — Sales Intelligence</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(155,89,247,0.08)"><div class="pop-kpi-val" style="color:#9b59f7">€105B</div><div class="pop-kpi-label">YTM Rev</div></div>
-      <div class="pop-kpi" style="background:rgba(155,89,247,0.06)"><div class="pop-kpi-val" style="color:#9b59f7">87</div><div class="pop-kpi-label">Companies</div></div>
-      <div class="pop-kpi" style="background:rgba(155,89,247,0.05)"><div class="pop-kpi-val" style="color:#9b59f7">30</div><div class="pop-kpi-label">Countries</div></div>
-    </div>
-    <div class="pop-bar-row"><span class="pop-bl">Inter Cos.</span><div class="pop-bt"><div class="pop-bf" style="width:100%;background:linear-gradient(90deg,#9b59f7,#f759ab)"></div></div><span style="font-size:.65rem;color:#9b59f7;margin-left:6px">€24,824M</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">Suzuki</span><div class="pop-bt"><div class="pop-bf" style="width:72%;background:#9b59f7;opacity:.8"></div></div><span style="font-size:.65rem;color:#9b59f7;margin-left:6px">€17,965M</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">Tata</span><div class="pop-bt"><div class="pop-bf" style="width:48%;background:#9b59f7;opacity:.65"></div></div><span style="font-size:.65rem;color:#9b59f7;margin-left:6px">€11,858M</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">M&M</span><div class="pop-bt"><div class="pop-bf" style="width:44%;background:#9b59f7;opacity:.55"></div></div><span style="font-size:.65rem;color:#9b59f7;margin-left:6px">€10,926M</span></div>
-  </div>
-</div>
+<div class="pc th-purple" data-cat="sales"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">Sales Analytics · Global</div><h3>iKnow — Sales Intelligence Platform</h3><p>€105B+ YTM revenue across 87 companies, 30 countries — customer intel, PV forecast, 3CX and ad-hoc modules.</p><div class="pc-tags"><span class="pct">Qliksense</span><span class="pct">Sales BI</span><span class="pct">30 Countries</span></div><div class="pc-mini"><div class="mini-label">Customer Revenue</div><div class="mini-bar-row"><span class="mbl">Inter Cos.</span><div class="mbt"><div class="mbf" style="width:100%;background:linear-gradient(90deg,#9b59f7,#f759ab)"></div></div></div><div class="mini-bar-row"><span class="mbl">Suzuki</span><div class="mbt"><div class="mbf" style="width:72%"></div></div></div></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#9b59f7">📈 iKnow Sales Intelligence</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">€105B</div><div class="bkpi-label">YTM Rev</div></div><div class="bkpi"><div class="bkpi-val">87</div><div class="bkpi-label">Companies</div></div><div class="bkpi"><div class="bkpi-val">30</div><div class="bkpi-label">Countries</div></div></div><div class="bbar-row"><span class="bbl">Inter Cos.</span><div class="bbt"><div class="bbf" style="width:100%;background:linear-gradient(90deg,#9b59f7,#f759ab)"></div></div><span style="font-size:.6rem;color:#9b59f7;margin-left:6px">€24,824M</span></div><div class="bbar-row"><span class="bbl">Suzuki</span><div class="bbt"><div class="bbf" style="width:72%"></div></div><span style="font-size:.6rem;color:#9b59f7;margin-left:6px">€17,965M</span></div><div class="bbar-row"><span class="bbl">Tata</span><div class="bbt"><div class="bbf" style="width:48%"></div></div><span style="font-size:.6rem;color:#9b59f7;margin-left:6px">€11,858M</span></div></div>
+</div></div>
 
 <!-- Sales 2 -->
-<div class="pc pc-purple" data-cat="sales">
-  <div class="pc-top"><div class="pc-icon">🌍</div><div class="pc-label">Procurement</div><h3>Global Supplier Intelligence</h3><p>Supplier-level spend, overlap, and sourcing optimisation across 35K+ ERP suppliers with forex and intercompany reconciliation.</p><div class="pc-techs"><span class="pct">Qliksense</span><span class="pct">Procurement</span><span class="pct">Forex</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#9b59f7">Top Suppliers</div><div class="mini-bar-row"><span class="mbl" style="color:#9b59f7">C.H. Rob</span><div class="mbt"><div class="mbf" style="width:100%;background:#9b59f7"></div></div></div><div class="mini-bar-row"><span class="mbl" style="color:#9b59f7">MOVON</span><div class="mbt"><div class="mbf" style="width:84%;background:#9b59f7;opacity:.8"></div></div></div></div>
-  <div class="pc-popover" style="border-color:rgba(155,89,247,0.3)">
-    <div class="pop-title" style="color:#9b59f7">🌍 Global Supplier Intelligence</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(155,89,247,0.08)"><div class="pop-kpi-val" style="color:#9b59f7">35K+</div><div class="pop-kpi-label">Suppliers</div></div>
-      <div class="pop-kpi" style="background:rgba(155,89,247,0.06)"><div class="pop-kpi-val" style="color:#9b59f7">Forex</div><div class="pop-kpi-label">Analysis</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.07)"><div class="pop-kpi-val" style="color:#00d478">43%</div><div class="pop-kpi-label">Top 5 Share</div></div>
-    </div>
-    <div class="pop-bar-row"><span class="pop-bl">C.H. Robinson</span><div class="pop-bt"><div class="pop-bf" style="width:100%;background:#9b59f7"></div></div><span style="font-size:.65rem;color:#9b59f7;margin-left:6px">€4.2B</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">MOVON</span><div class="pop-bt"><div class="pop-bf" style="width:84%;background:#9b59f7;opacity:.8"></div></div><span style="font-size:.65rem;color:#9b59f7;margin-left:6px">€3.5B</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">Continental</span><div class="pop-bt"><div class="pop-bf" style="width:12%;background:#9b59f7;opacity:.5"></div></div><span style="font-size:.65rem;color:#9b59f7;margin-left:6px">€494M</span></div>
-  </div>
-</div>
+<div class="pc th-purple" data-cat="sales"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">Procurement · Forex</div><h3>Global Supplier Intelligence</h3><p>Supplier-level spend, overlap, and sourcing optimisation across 35K+ ERP suppliers with forex reconciliation.</p><div class="pc-tags"><span class="pct">Qliksense</span><span class="pct">Procurement</span><span class="pct">Forex</span></div><div class="pc-mini"><div class="mini-label">Top Suppliers</div><div class="mini-bar-row"><span class="mbl">C.H. Rob.</span><div class="mbt"><div class="mbf" style="width:100%"></div></div></div><div class="mini-bar-row"><span class="mbl">MOVON</span><div class="mbt"><div class="mbf" style="width:84%"></div></div></div></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#9b59f7">🌍 Global Suppliers</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">35K+</div><div class="bkpi-label">Suppliers</div></div><div class="bkpi"><div class="bkpi-val">Forex</div><div class="bkpi-label">Analysis</div></div><div class="bkpi"><div class="bkpi-val" style="color:#00d478">43%</div><div class="bkpi-label">Top 5 Share</div></div></div><div class="bbar-row"><span class="bbl">C.H. Robinson</span><div class="bbt"><div class="bbf" style="width:100%"></div></div><span style="font-size:.6rem;color:#9b59f7;margin-left:6px">€4.2B</span></div><div class="bbar-row"><span class="bbl">MOVON</span><div class="bbt"><div class="bbf" style="width:84%"></div></div><span style="font-size:.6rem;color:#9b59f7;margin-left:6px">€3.5B</span></div><div class="bbar-row"><span class="bbl">Continental</span><div class="bbt"><div class="bbf" style="width:12%"></div></div><span style="font-size:.6rem;color:#9b59f7;margin-left:6px">€494M</span></div></div>
+</div></div>
 
 <!-- ML 1 -->
-<div class="pc pc-teal" data-cat="ml">
-  <div class="pc-top"><div class="pc-icon">🤖</div><div class="pc-label">ML / Advanced</div><h3>Predictive Analytics — Qlik AutoML</h3><p>Deployed Qlik AutoML models for demand forecasting and workforce attrition prediction integrated into SaaS dashboards.</p><div class="pc-techs"><span class="pct">Qlik AutoML</span><span class="pct">Forecasting</span><span class="pct">Classification</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#00d4aa">Model Accuracy</div><div class="mini-kpis"><div class="mk" style="background:rgba(0,212,170,0.08)"><div class="mk-val" style="color:#00d4aa">91%</div><div class="mk-label">Demand</div></div><div class="mk" style="background:rgba(0,212,170,0.06)"><div class="mk-val" style="color:#00d4aa">87%</div><div class="mk-label">Attrition</div></div><div class="mk" style="background:rgba(0,212,170,0.05)"><div class="mk-val" style="color:#00d4aa">89%</div><div class="mk-label">Anomaly</div></div></div></div>
-  <div class="pc-popover" style="border-color:rgba(0,212,170,0.3)">
-    <div class="pop-title" style="color:#00d4aa">🤖 Qlik AutoML — Predictive BI</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(0,212,170,0.08)"><div class="pop-kpi-val" style="color:#00d4aa">91%</div><div class="pop-kpi-label">Demand F.</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,170,0.06)"><div class="pop-kpi-val" style="color:#00d4aa">87%</div><div class="pop-kpi-label">Attrition</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,170,0.05)"><div class="pop-kpi-val" style="color:#00d4aa">89%</div><div class="pop-kpi-label">Anomaly</div></div>
-    </div>
-    <div class="pop-bar-row"><span class="pop-bl">Demand F.</span><div class="pop-bt"><div class="pop-bf" style="width:91%;background:linear-gradient(90deg,#00d4aa,#00a080)"></div></div><span style="font-size:.65rem;color:#00d4aa;margin-left:6px">91%</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">Anomaly</span><div class="pop-bt"><div class="pop-bf" style="width:89%;background:#00d4aa;opacity:.8"></div></div><span style="font-size:.65rem;color:#00d4aa;margin-left:6px">89%</span></div>
-    <div class="pop-bar-row"><span class="pop-bl">Attrition</span><div class="pop-bt"><div class="pop-bf" style="width:87%;background:#00d4aa;opacity:.7"></div></div><span style="font-size:.65rem;color:#00d4aa;margin-left:6px">87%</span></div>
-  </div>
-</div>
+<div class="pc th-teal" data-cat="ml"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">ML · Qlik AutoML</div><h3>Predictive Analytics — AutoML</h3><p>Qlik AutoML models for demand forecasting and workforce attrition prediction, integrated into live SaaS dashboards.</p><div class="pc-tags"><span class="pct">Qlik AutoML</span><span class="pct">Forecasting</span><span class="pct">Classification</span></div><div class="pc-mini"><div class="mini-kpis"><div class="mk"><div class="mk-val">91%</div><div class="mk-label">Demand</div></div><div class="mk"><div class="mk-val">87%</div><div class="mk-label">Attrition</div></div><div class="mk"><div class="mk-val">89%</div><div class="mk-label">Anomaly</div></div></div></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#00d4aa">🤖 Qlik AutoML</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">91%</div><div class="bkpi-label">Demand</div></div><div class="bkpi"><div class="bkpi-val">87%</div><div class="bkpi-label">Attrition</div></div><div class="bkpi"><div class="bkpi-val">89%</div><div class="bkpi-label">Anomaly</div></div></div><div class="bbar-row"><span class="bbl">Demand F.</span><div class="bbt"><div class="bbf" style="width:91%;background:linear-gradient(90deg,#00d4aa,#00a080)"></div></div><span style="font-size:.6rem;color:#00d4aa;margin-left:6px">91%</span></div><div class="bbar-row"><span class="bbl">Anomaly</span><div class="bbt"><div class="bbf" style="width:89%"></div></div><span style="font-size:.6rem;color:#00d4aa;margin-left:6px">89%</span></div><div class="bbar-row"><span class="bbl">Attrition</span><div class="bbt"><div class="bbf" style="width:87%"></div></div><span style="font-size:.6rem;color:#00d4aa;margin-left:6px">87%</span></div></div>
+</div></div>
 
 <!-- ML 2 -->
-<div class="pc pc-teal" data-cat="ml">
-  <div class="pc-top"><div class="pc-icon">📉</div><div class="pc-label">ML / Advanced</div><h3>Time Series Forecasting — Finance</h3><p>ARIMA + ML hybrid forecasting for revenue, EBITDA, and Capex embedded in Power BI for CFO-level planning.</p><div class="pc-techs"><span class="pct">Python</span><span class="pct">ARIMA</span><span class="pct">Power BI</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#00d4aa">Forecast vs Actual</div><svg class="mini-line" viewBox="0 0 220 35"><polyline points="0,28 55,20 110,14 165,10 220,6" fill="none" stroke="#00d4aa" stroke-width="1.5"/><polyline points="0,28 55,22 110,17 165,13 220,9" fill="none" stroke="#f5c842" stroke-width="1.2" stroke-dasharray="4,3" opacity=".7"/></svg></div>
-  <div class="pc-popover" style="border-color:rgba(0,212,170,0.3)">
-    <div class="pop-title" style="color:#00d4aa">📉 Time Series Forecasting</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(0,212,170,0.07)"><div class="pop-kpi-val" style="color:#00d4aa">3.2%</div><div class="pop-kpi-label">MAPE</div></div>
-      <div class="pop-kpi" style="background:rgba(245,200,66,0.07)"><div class="pop-kpi-val" style="color:#f5c842">0.94</div><div class="pop-kpi-label">R²</div></div>
-      <div class="pop-kpi" style="background:rgba(79,142,247,0.07)"><div class="pop-kpi-val" style="color:#4f8ef7">12mo</div><div class="pop-kpi-label">Horizon</div></div>
-    </div>
-    <svg class="pop-chart" viewBox="0 0 280 55"><polyline points="0,48 70,38 140,26 210,16 280,8" fill="none" stroke="#00d4aa" stroke-width="1.8"/><polyline points="0,48 70,40 140,30 210,20 280,13" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-dasharray="5,4" opacity=".7"/><text x="200" y="6" font-size="8" fill="#00d4aa">Forecast</text><text x="200" y="16" font-size="8" fill="#f5c842">Actual</text></svg>
-  </div>
-</div>
+<div class="pc th-teal" data-cat="ml"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">ML · ARIMA / Python</div><h3>Time Series Forecasting — Finance</h3><p>ARIMA + ML hybrid forecasting for revenue, EBITDA, and Capex embedded in Power BI for CFO-level planning.</p><div class="pc-tags"><span class="pct">Python</span><span class="pct">ARIMA</span><span class="pct">Power BI</span></div><div class="pc-mini"><div class="mini-label">Forecast vs Actual</div><svg class="mini-line" viewBox="0 0 220 32"><polyline points="0,26 55,19 110,13 165,9 220,5" fill="none" stroke="#00d4aa" stroke-width="1.5"/><polyline points="0,26 55,21 110,16 165,12 220,8" fill="none" stroke="#f5c842" stroke-width="1.2" stroke-dasharray="4,3" opacity=".7"/></svg></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#00d4aa">📉 Time Series Forecasting</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">3.2%</div><div class="bkpi-label">MAPE</div></div><div class="bkpi"><div class="bkpi-val" style="color:#f5c842">0.94</div><div class="bkpi-label">R²</div></div><div class="bkpi"><div class="bkpi-val" style="color:#4f8ef7">12mo</div><div class="bkpi-label">Horizon</div></div></div><svg class="back-chart" viewBox="0 0 280 56"><polyline points="0,52 70,42 140,28 210,16 280,7" fill="none" stroke="#00d4aa" stroke-width="1.8"/><polyline points="0,52 70,44 140,32 210,20 280,12" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-dasharray="5,4" opacity=".7"/></svg></div>
+</div></div>
 
 <!-- ML 3 -->
-<div class="pc pc-red" data-cat="ml">
-  <div class="pc-top"><div class="pc-icon">⚡</div><div class="pc-label">ML / Advanced</div><h3>Anomaly Detection — Operations</h3><p>Real-time anomaly detection on production and financial data streams flagging outliers with root-cause context in Qlik.</p><div class="pc-techs"><span class="pct">Python</span><span class="pct">Clustering</span><span class="pct">QlikSense</span></div></div>
-  <div class="pc-dash"><div class="pc-dash-title" style="color:#e74c3c">Anomalies</div><div class="mini-kpis"><div class="mk" style="background:rgba(231,76,60,0.08)"><div class="mk-val" style="color:#e74c3c">24</div><div class="mk-label">This Mo.</div></div><div class="mk" style="background:rgba(245,200,66,0.07)"><div class="mk-val" style="color:#f5c842">↓68%</div><div class="mk-label">vs Q1</div></div><div class="mk" style="background:rgba(0,212,120,0.07)"><div class="mk-val" style="color:#00d478">98%</div><div class="mk-label">Recall</div></div></div></div>
-  <div class="pc-popover" style="border-color:rgba(231,76,60,0.3)">
-    <div class="pop-title" style="color:#e74c3c">⚡ Anomaly Detection — Operations</div>
-    <div class="pop-kpi-row">
-      <div class="pop-kpi" style="background:rgba(231,76,60,0.08)"><div class="pop-kpi-val" style="color:#e74c3c">24</div><div class="pop-kpi-label">Anomalies</div></div>
-      <div class="pop-kpi" style="background:rgba(245,200,66,0.07)"><div class="pop-kpi-val" style="color:#f5c842">↓68%</div><div class="pop-kpi-label">vs Q1</div></div>
-      <div class="pop-kpi" style="background:rgba(0,212,120,0.07)"><div class="pop-kpi-val" style="color:#00d478">98%</div><div class="pop-kpi-label">Recall</div></div>
-    </div>
-    <svg class="pop-chart" viewBox="0 0 280 55"><polyline points="0,20 35,22 70,18 105,24 140,15 175,20 210,16 245,25 280,12" fill="none" stroke="rgba(231,76,60,0.3)" stroke-width="1"/><circle cx="105" cy="24" r="4" fill="#e74c3c" opacity=".9"/><circle cx="245" cy="25" r="4" fill="#e74c3c" opacity=".7"/><circle cx="0" cy="20" r="3" fill="#f5c842" opacity=".6"/><polyline points="0,20 35,22 70,18 105,24 140,15 175,20 210,16 245,25 280,12" fill="none" stroke="#e74c3c" stroke-width="1.5"/><text x="96" y="38" font-size="8" fill="#e74c3c">↑ spike</text><text x="236" y="38" font-size="8" fill="#e74c3c">↑ spike</text></svg>
-  </div>
-</div>
+<div class="pc th-red" data-cat="ml"><div class="pc-inner">
+<div class="pc-front"><div class="pc-eyebrow">ML · Clustering / Python</div><h3>Anomaly Detection — Operations</h3><p>Real-time anomaly detection on production and financial data streams — outliers flagged with root-cause context.</p><div class="pc-tags"><span class="pct">Python</span><span class="pct">Clustering</span><span class="pct">QlikSense</span></div><div class="pc-mini"><div class="mini-kpis"><div class="mk"><div class="mk-val">24</div><div class="mk-label">Anomalies</div></div><div class="mk"><div class="mk-val" style="color:#f5c842">↓68%</div><div class="mk-label">vs Q1</div></div><div class="mk"><div class="mk-val" style="color:#00d478">98%</div><div class="mk-label">Recall</div></div></div></div></div>
+<div class="pc-back"><div class="pc-back-title" style="color:#e74c3c">⚡ Anomaly Detection</div><div class="bkpi-grid"><div class="bkpi"><div class="bkpi-val">24</div><div class="bkpi-label">Anomalies</div></div><div class="bkpi"><div class="bkpi-val" style="color:#f5c842">↓68%</div><div class="bkpi-label">vs Q1</div></div><div class="bkpi"><div class="bkpi-val" style="color:#00d478">98%</div><div class="bkpi-label">Recall</div></div></div><svg class="back-chart" viewBox="0 0 280 56"><polyline points="0,22 40,24 80,20 120,26 160,16 200,22 240,18 280,14" fill="none" stroke="#e74c3c" stroke-width="1.5"/><circle cx="120" cy="26" r="5" fill="#e74c3c" opacity=".85"/><circle cx="240" cy="18" r="4" fill="#e74c3c" opacity=".7"/><text x="108" y="42" font-size="9" fill="#e74c3c">↑ spike</text><text x="228" y="34" font-size="9" fill="#e74c3c">↑ spike</text></svg></div>
+</div></div>
 
+    </div><!-- /proj-grid -->
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact" class="section">
+  <div class="container">
+    <div class="section-eyebrow">04 Impact</div>
+    <h2 class="section-title">KEY <em>IMPACT</em></h2>
+    <div class="impact-grid">
+      <div class="impact-cell">
+        <div class="ic-num">~40%</div>
+        <div class="ic-label">Rework Reduction</div>
+        <div class="ic-desc">Mentoring BI resources and enforcing quality reviews reduced post-delivery rework by ~40% across client engagements.</div>
+      </div>
+      <div class="impact-cell">
+        <div class="ic-num">~60%</div>
+        <div class="ic-label">Manual Effort Cut</div>
+        <div class="ic-desc">Operational analytics for injection molding, inventory &amp; paintline cut manual data consolidation effort by ~60% through automation.</div>
+      </div>
+      <div class="impact-cell">
+        <div class="ic-num">18+</div>
+        <div class="ic-label">End-to-End Projects</div>
+        <div class="ic-desc">From data ingestion to executive dashboards — across manufacturing, HR, finance, sales, and cloud BI for 10+ global clients.</div>
+      </div>
+      <div class="impact-cell">
+        <div class="ic-num">7.5+</div>
+        <div class="ic-label">Years Enterprise BI</div>
+        <div class="ic-desc">Consistent delivery across Qlik, Power BI, MS Fabric and AWS — building analytics platforms that get used, not just built.</div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section" style="background:var(--bg);position:relative;overflow:hidden;">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(79,142,247,0.06),transparent 70%);pointer-events:none;"></div>
-  <div class="container" style="position:relative;z-index:1;">
-    <div class="s-tag">03 — Contact</div>
-    <h2 class="s-title">Let's build<br><em>something great</em></h2>
-    <p style="color:var(--muted);margin:16px 0 52px;font-size:.95rem;line-height:1.75;max-width:520px;">Whether you're scaling an analytics team, modernising your BI stack, or need a senior data expert to own end-to-end reporting — let's talk.</p>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:860px;">
-
-      <!-- Email card -->
-      <a href="mailto:itzmeanay@gmail.com?subject=Opportunity%20for%20Anay%20Biswas%20%E2%80%94%20BI%20Lead&body=Hi%20Anay%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20love%20to%20discuss%20a%20potential%20opportunity.%0A%0ARole%2FProject%3A%20%5BDescribe%20here%5D%0ACompany%3A%20%5BYour%20company%5D%0ATimeline%3A%20%5BExpected%20start%5D%0A%0ALooking%20forward%20to%20hearing%20from%20you.%0A%0ARegards%2C%0A%5BYour%20Name%5D"
-        style="background:var(--card);border:1px solid rgba(245,200,66,0.2);border-radius:20px;padding:28px;text-decoration:none;display:flex;align-items:center;gap:18px;transition:all .28s;group:1;"
-        onmouseover="this.style.borderColor='rgba(245,200,66,0.5)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 40px rgba(245,200,66,0.1)'"
-        onmouseout="this.style.borderColor='rgba(245,200,66,0.2)';this.style.transform='none';this.style.boxShadow='none'">
-        <div style="width:52px;height:52px;border-radius:14px;background:rgba(245,200,66,0.1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">✉️</div>
-        <div>
-          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:4px;">Send an Email</div>
-          <div style="color:var(--gold);font-size:.85rem;">itzmeanay@gmail.com</div>
-          <div style="color:var(--muted);font-size:.75rem;margin-top:3px;">Opens mail with pre-filled template</div>
+<section id="contact">
+  <div class="container">
+    <div class="section-eyebrow">05 Contact</div>
+    <h2 class="section-title">LET'S BUILD SOMETHING <em>TOGETHER</em></h2>
+    <div class="contact-layout">
+      <div class="contact-left">
+        <p>Whether you have an open role, a data problem to solve, or a BI initiative to kick off — I'd love to hear about it. Reach out via call, email, or LinkedIn and let's talk.</p>
+        <a href="#" onclick="openResume(event)" class="btn-primary" style="display:inline-block;margin-bottom:32px;">⬇ Download Resume</a>
+        <div class="avail-strip">
+          <div class="avail-dot"></div>
+          <span><strong>Currently available</strong> — open to full-time roles, consulting &amp; advisory engagements globally. Typical response within 24 hours.</span>
         </div>
-        <div style="margin-left:auto;color:var(--gold);font-size:1.1rem;">→</div>
-      </a>
-
-      <!-- Phone card -->
-      <a href="tel:+917001987280"
-        style="background:var(--card);border:1px solid rgba(0,212,170,0.2);border-radius:20px;padding:28px;text-decoration:none;display:flex;align-items:center;gap:18px;transition:all .28s;"
-        onmouseover="this.style.borderColor='rgba(0,212,170,0.5)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 40px rgba(0,212,170,0.08)'"
-        onmouseout="this.style.borderColor='rgba(0,212,170,0.2)';this.style.transform='none';this.style.boxShadow='none'">
-        <div style="width:52px;height:52px;border-radius:14px;background:rgba(0,212,170,0.1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">📞</div>
-        <div>
-          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:4px;">Schedule a Call</div>
-          <div style="color:var(--teal);font-size:.85rem;">+91 7001987280</div>
-          <div style="color:var(--muted);font-size:.75rem;margin-top:3px;">Tap to call on mobile</div>
-        </div>
-        <div style="margin-left:auto;color:var(--teal);font-size:1.1rem;">→</div>
-      </a>
-
-      <!-- LinkedIn card -->
-      <a href="https://www.linkedin.com/in/anaybiswas" target="_blank" rel="noopener"
-        style="background:var(--card);border:1px solid rgba(79,142,247,0.2);border-radius:20px;padding:28px;text-decoration:none;display:flex;align-items:center;gap:18px;transition:all .28s;"
-        onmouseover="this.style.borderColor='rgba(79,142,247,0.5)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 40px rgba(79,142,247,0.08)'"
-        onmouseout="this.style.borderColor='rgba(79,142,247,0.2)';this.style.transform='none';this.style.boxShadow='none'">
-        <div style="width:52px;height:52px;border-radius:14px;background:rgba(79,142,247,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path d="M8 10v7M8 7v.5M12 17v-4a2 2 0 014 0v4M12 10v7" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
-        <div>
-          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:4px;">Connect on LinkedIn</div>
-          <div style="color:var(--blue);font-size:.85rem;">linkedin.com/in/anaybiswas</div>
-          <div style="color:var(--muted);font-size:.75rem;margin-top:3px;">View full profile &amp; endorsements</div>
-        </div>
-        <div style="margin-left:auto;color:var(--blue);font-size:1.1rem;">→</div>
-      </a>
-
-      <!-- Resume card -->
-      <a href="#" onclick="openResume(event)"
-        style="background:var(--card);border:1px solid rgba(155,89,247,0.2);border-radius:20px;padding:28px;text-decoration:none;display:flex;align-items:center;gap:18px;transition:all .28s;"
-        onmouseover="this.style.borderColor='rgba(155,89,247,0.5)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 16px 40px rgba(155,89,247,0.08)'"
-        onmouseout="this.style.borderColor='rgba(155,89,247,0.2)';this.style.transform='none';this.style.boxShadow='none'">
-        <div style="width:52px;height:52px;border-radius:14px;background:rgba(155,89,247,0.1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">📄</div>
-        <div>
-          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;margin-bottom:4px;">Download Resume</div>
-          <div style="color:var(--purple);font-size:.85rem;">Anay_Biswas_Resume.pdf</div>
-          <div style="color:var(--muted);font-size:.75rem;margin-top:3px;">Latest CV — PDF format</div>
-        </div>
-        <div style="margin-left:auto;color:var(--purple);font-size:1.1rem;">⬇</div>
-      </a>
-
-    </div>
-
-    <!-- Bottom availability strip -->
-    <div style="margin-top:40px;max-width:860px;background:rgba(0,212,170,0.04);border:1px solid rgba(0,212,170,0.12);border-radius:14px;padding:18px 24px;display:flex;align-items:center;gap:14px;">
-      <div style="width:10px;height:10px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite;flex-shrink:0;"></div>
+      </div>
       <div>
-        <span style="color:var(--text);font-size:.88rem;font-weight:600;">Currently available</span>
-        <span style="color:var(--muted);font-size:.85rem;"> — open to full-time roles, consulting projects, and advisory engagements globally. Typical response within 24 hours.</span>
+        <div class="contact-cards">
+          <a href="tel:+917001987280" class="cc">
+            <div class="cc-icon">📞</div>
+            <div class="cc-info"><div class="cc-title">Call Me</div><div class="cc-val">+91 7001987280</div></div>
+            <div class="cc-arrow">→</div>
+          </a>
+          <a href="mailto:itzmeanay@gmail.com?subject=Opportunity%20for%20Anay%20Biswas%20%E2%80%94%20BI%20Lead&body=Hi%20Anay%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20love%20to%20discuss%20a%20potential%20opportunity.%0A%0ARole%2FProject%3A%20%5BDescribe%20here%5D%0ACompany%3A%20%5BYour%20company%5D%0ATimeline%3A%20%5BExpected%20start%5D%0A%0ALooking%20forward%20to%20hearing%20from%20you.%0A%0ARegards%2C%0A%5BYour%20Name%5D" class="cc">
+            <div class="cc-icon">✉️</div>
+            <div class="cc-info"><div class="cc-title">Send an Email</div><div class="cc-val">itzmeanay@gmail.com</div></div>
+            <div class="cc-arrow">→</div>
+          </a>
+          <a href="https://linkedin.com/in/anaybiswas" target="_blank" rel="noopener" class="cc">
+            <div class="cc-icon" style="font-size:.75rem;font-weight:700;color:#0A66C2;">in</div>
+            <div class="cc-info"><div class="cc-title">Connect on LinkedIn</div><div class="cc-val">linkedin.com/in/anaybiswas</div></div>
+            <div class="cc-arrow">→</div>
+          </a>
+        </div>
       </div>
     </div>
-
   </div>
 </section>
 
 <footer>
-  <span>© 2026 <strong>Anay Biswas</strong> · Senior BI Lead &amp; Data Analytics Professional · Noida, India</span>
-  <span style="color:rgba(100,100,130,0.4)">Numbers shown are illustrative · Single-file HTML portfolio</span>
+  <div class="footer-name">ANAY BISWAS <span>· Senior BI Lead · Open to Opportunities Globally</span></div>
+  <div class="footer-note">© 2026 · All Rights Reserved · Numbers shown are illustrative</div>
 </footer>
 
 <!-- RESUME MODAL -->
 <div class="modal-overlay" id="resumeModal" onclick="if(event.target===this)closeResume()">
   <div class="modal-box">
     <button class="modal-close" onclick="closeResume()">✕</button>
-    <div class="modal-title">⬇ Download Resume</div>
-    <div class="modal-sub">Save a copy of Anay's resume, or reach out directly to request the latest version.</div>
+    <div class="modal-title">Download Resume</div>
+    <div class="modal-sub">Save a copy of Anay's resume or request the latest version via email.</div>
     <div class="modal-btns">
-      <a href="javascript:void(0)" onclick="alert('Replace this with your resume PDF path: e.g., href=Anay_Biswas_Resume.pdf download');closeResume();" class="modal-btn mb-pdf">📄 Download PDF Resume</a>
-      <a href="mailto:itzmeanay@gmail.com?subject=Resume%20Request%20%E2%80%94%20Anay%20Biswas&body=Hi%20Anay%2C%0A%0ACould%20you%20please%20send%20me%20your%20latest%20resume%3F%0A%0ARegards%2C%0A%5BYour%20Name%5D" class="modal-btn mb-mail">✉️ Request via Email</a>
+      <a href="javascript:void(0)" onclick="alert('Replace href with your PDF path e.g. Anay_Biswas_Resume.pdf and add the download attribute.');closeResume();" class="mbtn">📄 Download PDF Resume</a>
+      <a href="mailto:itzmeanay@gmail.com?subject=Resume%20Request%20%E2%80%94%20Anay%20Biswas&body=Hi%20Anay%2C%0A%0ACould%20you%20please%20send%20me%20your%20latest%20resume%3F%0A%0ARegards%2C%0A%5BYour%20Name%5D" class="mbtn">✉️ Request via Email</a>
     </div>
   </div>
 </div>
 
 <script>
-// ── Particles ──
-const cv=document.getElementById('pCanvas'),cx=cv.getContext('2d');let W,H,pts=[];
-function rsz(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;}rsz();
-window.addEventListener('resize',()=>{rsz();init();});
-function init(){pts=[];for(let i=0;i<90;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.4+.4});}
-init();
-(function draw(){cx.clearRect(0,0,W,H);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);cx.fillStyle='rgba(79,142,247,0.3)';cx.fill();});pts.forEach((a,i)=>pts.slice(i+1).forEach(b=>{const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<110){cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.strokeStyle=`rgba(79,142,247,${.12*(1-d/110)})`;cx.lineWidth=.5;cx.stroke();}}));requestAnimationFrame(draw);})();
+// Ticker
+const skills=['Qlik SaaS','Qliksense','QlikView','Power BI','DAX','SQL','PySpark','MS Fabric','AWS EC2','S3','OneLake','ETL Pipelines','NPrinting','AutoML','Star Schema','Data Modelling','Row-Level Security','Qlik CLI','Python'];
+const t=document.getElementById('ticker');
+const double=[...skills,...skills].map(s=>`<span class="ticker-item">${s}</span>`).join('');
+t.innerHTML=double+double;
 
-// ── Animated counters ──
-function animCount(el,target,dur,dec){
-  const start=performance.now();
-  (function step(now){
-    const t=Math.min((now-start)/dur,1);
-    const val=t*target;
-    el.textContent=dec?val.toFixed(1):Math.round(val);
-    if(t<1)requestAnimationFrame(step);
-  })(start);
-}
+// Skill bars animate on scroll
 const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){
-    animCount(document.getElementById('cnt-yrs'),7.5,1200,true);
-    animCount(document.getElementById('cnt-proj'),18,1000,false);
-    animCount(document.getElementById('cnt-clients'),10,800,false);
-    animCount(document.getElementById('cnt-ind'),5,600,false);
-    obs.disconnect();
-  }});
-},{threshold:.3});
-obs.observe(document.getElementById('cnt-yrs'));
-
-// ── Activity bars (hero) ──
-const ab=document.getElementById('actBars');
-if(ab){
-  const d=[2,3,4,5,6,8,10,12,14,16,14,12,10,8,6,5,7,9,11,14,16,18,16,18];
-  const mx=Math.max(...d);
-  const cols=['#4f8ef7','#00d4aa','#9b59f7','#f5c842','#f759ab','#f57814','#4f8ef7','#00d4aa'];
-  d.forEach((v,i)=>{const b=document.createElement('div');b.className='act-bar';b.style.cssText=`height:${(v/mx)*100}%;background:${cols[i%cols.length]};opacity:.75;`;ab.appendChild(b);});
-}
-
-// ── Career timeline ──
-const ct=document.getElementById('careerTimeline');
-if(ct){
-  const roles=[
-    {label:'Trainee',yr:'2018',w:13,c:'#4f8ef7'},
-    {label:'SE',yr:'2019',w:20,c:'#00d4aa'},
-    {label:'SSE',yr:'2021',w:10,c:'#9b59f7'},
-    {label:'Lead Eng',yr:'2022',w:20,c:'#f5c842'},
-    {label:'Module Lead',yr:'2024',w:17,c:'#f57814'},
-  ];
-  roles.forEach(r=>{
-    const row=document.createElement('div');
-    row.style.cssText='display:flex;align-items:center;gap:8px;margin-bottom:7px;';
-    row.innerHTML=`<span style="font-size:.62rem;color:#5a5a80;width:72px;flex-shrink:0;text-align:right">${r.yr} · ${r.label}</span><div style="flex:1;height:10px;background:rgba(255,255,255,0.04);border-radius:3px;overflow:hidden"><div style="height:100%;width:0%;background:${r.c};border-radius:3px;transition:width 1.2s ease" data-w="${r.w}%"></div></div>`;
-    ct.appendChild(row);
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.sb-fill').forEach(b=>{b.style.width=b.dataset.w+'%';});
+      obs.unobserve(e.target);
+    }
   });
-  // Animate in on scroll
-  const obs2=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting){
-      ct.querySelectorAll('[data-w]').forEach(b=>{setTimeout(()=>{b.style.width=b.dataset.w;},100);});
-      obs2.disconnect();
-    }});
-  },{threshold:.3});
-  obs2.observe(ct);
+},{threshold:.3});
+const sb=document.getElementById('skillBars');
+if(sb)obs.observe(sb);
+
+// Exp tabs
+function showExp(i,el){
+  document.querySelectorAll('.exp-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.exp-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('ep'+i).classList.add('active');
+  el.classList.add('active');
 }
 
-// ── Exp tabs ──
-function showExp(i,el){document.querySelectorAll('.exp-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.exp-nav-item').forEach(n=>n.classList.remove('active'));document.getElementById('ep'+i).classList.add('active');el.classList.add('active');}
+// Work filter
+function filterWork(cat,el){
+  document.querySelectorAll('.wf').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.pc').forEach(c=>{
+    if(cat==='all'||c.dataset.cat===cat)c.classList.remove('hidden');
+    else c.classList.add('hidden');
+  });
+}
 
-// ── Work filter ──
-function filterWork(cat,el){document.querySelectorAll('.wf').forEach(b=>b.classList.remove('active'));el.classList.add('active');document.querySelectorAll('.pc').forEach(c=>{if(cat==='all'||c.dataset.cat===cat)c.classList.remove('hidden');else c.classList.add('hidden');});}
-
-// ── Modal ──
+// Resume modal
 function openResume(e){e.preventDefault();document.getElementById('resumeModal').classList.add('open');}
 function closeResume(){document.getElementById('resumeModal').classList.remove('open');}
 </script>
